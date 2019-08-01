@@ -9,9 +9,7 @@ public:
      NavigationStubImpl();
      virtual ~NavigationStubImpl();
      virtual void foo(const std::shared_ptr<CommonAPI::ClientId> _client,
-            int32_t _x1, std::string _x2, fooReply_t _reply);
-     
-     virtual void getAllStreets(const std::shared_ptr<CommonAPI::ClientId> _client, getAllStreetsReply_t _reply);
+            int32_t _x1, std::string _x2, fooReply_t _reply); 
             
 };
 #endif /* HELLOWORLDSTUBIMPL_H_ */

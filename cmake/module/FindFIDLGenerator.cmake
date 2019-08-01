@@ -4,7 +4,7 @@ set(COMMON_API_PATH "${CMAKE_SOURCE_DIR}/cgen/commonapi-generator/commonapi-gene
 
 
 function(FIDLGenerate idlfile)
-    message(STATUS "FIDLGenerate ${COMMON_API_PATH}")
+    #message(STATUS "FIDLGenerate ${COMMON_API_PATH}")
     set(FILE_SRC_FULLPATH ${CMAKE_CURRENT_SOURCE_DIR}/${idlfile})
     set(FILE_DEST_FULLPATH ${CMAKE_CURRENT_BINARY_DIR}/${idlfile})
     set(GENERATION_STATUS 0)
@@ -15,8 +15,8 @@ function(FIDLGenerate idlfile)
                         WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
                         RESULT_VARIABLE result
                         OUTPUT_VARIABLE output)
-        message(STATUS ${output})
-        message(STATUS ${result})
+        #message(STATUS ${output})
+        #message(STATUS ${result})
         if(${result} EQUAL 1)
             set(GENERATION_STATUS 1)
         endif()

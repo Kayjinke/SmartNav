@@ -1,8 +1,6 @@
 // HelloWorldStubImpl.cpp
 #include "NavigationStubImpl.hpp"
 
-using namespace v1::commonapi;
-
 NavigationStubImpl::NavigationStubImpl()  { }
 NavigationStubImpl::~NavigationStubImpl() { }
 
@@ -17,11 +15,3 @@ void NavigationStubImpl::foo(const std::shared_ptr<CommonAPI::ClientId> _client,
     std::string y2 = "xyz";
     _reply(y1, y2);
 };
-
-void NavigationStubImpl::getAllStreets(const std::shared_ptr<CommonAPI::ClientId> _client, getAllStreetsReply_t _reply)
-{
-     Navigation::Stringlist streets;
-     streets.push_back("add");
-     streets.push_back("bbb");
-     _reply(streets);  
-}
