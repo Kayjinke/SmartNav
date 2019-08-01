@@ -4,7 +4,7 @@ find_package(FIDLGenerator)
 find_package(FDEPLGenerator)
 
 FIDLGenerate(HelloWorld.fidl)
-FDEPLGenerate(depl/HelloWorld.fdepl)
+FDEPLGenerate(HelloWorld.fdepl)
 FIDLGenerate(Navigation.fidl)
-FDEPLGenerate(depl/Navigation.fdepl)
+FDEPLGenerate(Navigation.fdepl)
 
