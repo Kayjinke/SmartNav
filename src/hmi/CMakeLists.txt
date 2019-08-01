@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.8)
 project(NavigationHMI)
 
 find_package(Qt5 COMPONENTS Core Gui REQUIRED)
+find_package(Qt5Widgets)
 
 SET(CMAKE_AUTOMOC ON)
 SET(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -11,8 +12,8 @@ SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
 
-SET(NavigationHMI_SOURCES main.cpp mainwindow.cpp)
-SET(NavigationHMI_HEADERS mainwindow.h)
+SET(NavigationHMI_SOURCES main.cpp widget.cpp)
+SET(NavigationHMI_HEADERS widget.h)
 SET(NavigationHMI_FORMS   mainwindow.ui)
 
 QT5_WRAP_CPP(NavigationHMI_HEADERS_MOC ${NavigationHMI_HEADERS})
