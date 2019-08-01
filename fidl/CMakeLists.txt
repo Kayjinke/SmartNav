@@ -7,4 +7,5 @@ FIDLGenerate(HelloWorld.fidl)
 FDEPLGenerate(HelloWorld.fdepl)
 FIDLGenerate(Navigation.fidl)
 FDEPLGenerate(Navigation.fdepl)
+FIDLGenerate(DestanionInput.fidl)
 

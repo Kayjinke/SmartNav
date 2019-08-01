@@ -4,17 +4,13 @@ interface DestinationInput {
     version {
         major 1 minor 0
     }
-    method Destination {
-        in {
-            String name
-        }
+    
+    array Stringlist of String
+    
+    method getAllStreets {
         out {
-            String message
+            Stringlist streets
         }
     }
-
-    attribute Int32 x
-    
-    attribute Int32 speed
 }
 
