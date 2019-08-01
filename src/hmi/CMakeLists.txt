@@ -5,16 +5,18 @@ project(NavigationHMI)
 find_package(Qt5 COMPONENTS Core Gui REQUIRED)
 find_package(Qt5Widgets)
 
-SET(CMAKE_AUTOMOC ON)
-SET(CMAKE_INCLUDE_CURRENT_DIR ON)
+#SET(CMAKE_AUTOMOC ON)
+#SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-#INCLUDE(${QT_USE_FILE})
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_BINARY_DIR})
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+include_directories(${Qt5Widgets_INCLUDE_DIRS})
+
 
 SET(NavigationHMI_SOURCES main.cpp widget.cpp)
 SET(NavigationHMI_HEADERS widget.h)
-SET(NavigationHMI_FORMS   mainwindow.ui)
+SET(NavigationHMI_FORMS   widget.ui)
 
 QT5_WRAP_CPP(NavigationHMI_HEADERS_MOC ${NavigationHMI_HEADERS})
 QT5_WRAP_UI(NavigationHMI_FORMS_HEADERS ${NavigationHMI_FORMS})
