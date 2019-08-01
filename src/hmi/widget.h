@@ -17,7 +17,10 @@ public:
 protected:
         void paintEvent(QPaintEvent *event);
 private slots:
-        void on_pushButton_clicked();
+        void on_destinationinput_btn_clicked();
+        
+private:
+   void hide_all();
 
 private:
     Ui::Widget *ui;

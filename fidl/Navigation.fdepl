@@ -7,6 +7,10 @@ define org.genivi.commonapi.someip.deployment for interface commonapi.Navigation
     method foo {
         SomeIpMethodID = 13300
     }
+    
+    method getAllStreets {
+        SomeIpMethodID = 13301
+    }
 }
   
 define org.genivi.commonapi.someip.deployment for provider MyService {  

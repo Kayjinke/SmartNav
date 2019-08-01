@@ -5,7 +5,10 @@ find_package(FDEPLGenerator)
 
 FIDLGenerate(HelloWorld.fidl)
 FDEPLGenerate(HelloWorld.fdepl)
+
 FIDLGenerate(Navigation.fidl)
 FDEPLGenerate(Navigation.fdepl)
-FIDLGenerate(DestanionInput.fidl)
+
+#FIDLGenerate(DestinationInput.fidl)
+#FDEPLGenerate(DestinationInput.fdepl)
 

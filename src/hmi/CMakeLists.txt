@@ -5,8 +5,7 @@ project(NavigationHMI)
 find_package(Qt5 COMPONENTS Core Gui REQUIRED)
 find_package(Qt5Widgets)
 
-#SET(CMAKE_AUTOMOC ON)
-#SET(CMAKE_INCLUDE_CURRENT_DIR ON)
+SET(CMAKE_AUTOUIC ON)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 
@@ -14,15 +13,21 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(${Qt5Widgets_INCLUDE_DIRS})
 
 
-SET(NavigationHMI_SOURCES main.cpp widget.cpp)
-SET(NavigationHMI_HEADERS widget.h)
-SET(NavigationHMI_FORMS   widget.ui)
+SET(NavigationHMI_SOURCES main.cpp widget.cpp destinationinput.cpp)
+SET(NavigationHMI_HEADERS widget.h destinationinput.h)
+SET(NavigationHMI_FORMS   widget.ui destinationinput.ui)
 
-QT5_WRAP_CPP(NavigationHMI_HEADERS_MOC ${NavigationHMI_HEADERS})
-QT5_WRAP_UI(NavigationHMI_FORMS_HEADERS ${NavigationHMI_FORMS})
+qt5_wrap_cpp(NavigationHMI_HEADERS_MOC ${NavigationHMI_HEADERS})
+qt5_wrap_ui(NavigationHMI_FORMS_HEADERS ${NavigationHMI_FORMS})
 
-add_executable(NavigationHMI ${NavigationHMI_SOURCES} ${NavigationHMI_HEADERS} ${NavigationHMI_HEADERS_MOC} ${NavigationHMI_HEADERS_MOC})
 
-target_link_libraries(NavigationHMI ${QT_LIBRARIES})
+add_executable(NavigationHMI ${NavigationHMI_SOURCES} ${NavigationHMI_HEADERS} ${NavigationHMI_HEADERS_MOC} ${NavigationHMI_HEADERS_MOC}
+	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/NavigationSomeIPProxy.cpp
+	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/NavigationSomeIPDeployment.cpp
+	)
+
+QT5_USE_MODULES(NavigationHMI Core Gui Widgets)
+
+target_link_libraries(NavigationHMI CommonAPI CommonAPI-SomeIP vsomeip)
 
 
