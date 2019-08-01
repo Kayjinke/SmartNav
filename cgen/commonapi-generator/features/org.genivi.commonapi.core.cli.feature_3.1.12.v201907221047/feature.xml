@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="org.genivi.commonapi.core.cli.feature"
+      label="CommonAPI Generator Feature"
+      version="3.1.12.v201907221047"
+      provider-name="BMW AG">
+
+   <plugin
+         id="org.genivi.commonapi.core.cli"
+         download-size="12"
+         install-size="26"
+         version="3.1.12.v201907221047"
+         unpack="false"/>
+
+   <plugin
+         id="org.genivi.commonapi.core"
+         download-size="938"
+         install-size="2645"
+         version="3.1.12.v201907221047"
+         unpack="false"/>
+
+</feature>
