@@ -2,15 +2,15 @@
 #include <iostream>
 #include <thread>
 #include <CommonAPI/CommonAPI.hpp>
-#include "NavigationStubImpl.hpp"
+#include "RouteCalculationStubImpl.hpp"
 
 using namespace std;
 
 int main() {
     std::shared_ptr<CommonAPI::Runtime> runtime = CommonAPI::Runtime::get();
-    std::shared_ptr<NavigationStubImpl> myService =
-    	std::make_shared<NavigationStubImpl>();
-    runtime->registerService("local", "navigation", myService);
+    std::shared_ptr<RouteCalculationStubImpl> myService =
+    	std::make_shared<RouteCalculationStubImpl>();
+    runtime->registerService("local", "calcRoute", myService);
     std::cout << "Successfully Registered Service!" << std::endl;
 
     while (true) {

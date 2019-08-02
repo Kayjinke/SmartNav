@@ -1,0 +1,26 @@
+package commonapi
+  
+interface RouteCalculation {
+    version {
+        major 1 minor 0
+    }
+    
+    struct Shapepoint
+    {
+        Int32 lon
+        Int32 lat
+    }
+    
+    array Shapepoints of Shapepoint
+    
+    method calcRoute {
+        in {
+            Shapepoint startPos
+            Shapepoint endPos
+        }
+        out {
+            Shapepoints routes
+        }
+    }
+}
+

@@ -7,22 +7,14 @@ include_directories(
     /usr/local/include/vsomeip
 )
 
-add_executable(NavigationClient
-	NavigationClient.cpp
-	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/NavigationSomeIPProxy.cpp
-	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/NavigationSomeIPDeployment.cpp
-)
-target_link_libraries(NavigationClient CommonAPI CommonAPI-SomeIP vsomeip)
-
-
-add_executable(NavigationService
-	NavigationService.cpp
-	NavigationStubImpl.cpp
-	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/NavigationSomeIPStubAdapter.cpp
-	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/NavigationStubDefault.cpp
-	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/NavigationSomeIPDeployment.cpp
+add_executable(RouteCalculationService
+	RouteCalculationService.cpp
+	RouteCalculationStubImpl.cpp
+	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/RouteCalculationSomeIPStubAdapter.cpp
+	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/RouteCalculationStubDefault.cpp
+	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/RouteCalculationSomeIPDeployment.cpp
 )
 
-target_link_libraries(NavigationService CommonAPI CommonAPI-SomeIP vsomeip)
+target_link_libraries(RouteCalculationService CommonAPI CommonAPI-SomeIP vsomeip)
 
 
