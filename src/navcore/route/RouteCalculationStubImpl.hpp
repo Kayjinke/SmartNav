@@ -6,7 +6,7 @@
 
 using namespace v1::commonapi;
 
-class RouteCalculationStubImpl: public v1_0::commonapi::RouteCalculationStubDefault {
+class RouteCalculationStubImpl:public v1_0::commonapi::RouteCalculationStubDefault {
 public:
      RouteCalculationStubImpl();
      virtual ~RouteCalculationStubImpl();

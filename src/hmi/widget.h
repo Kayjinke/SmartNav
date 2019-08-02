@@ -18,6 +18,7 @@ protected:
         void paintEvent(QPaintEvent *event);
 private slots:
         void on_destinationinput_btn_clicked();
+        void on_routecalculation_btn_clicked();
         
 private:
    void hide_all();

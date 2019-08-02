@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>DestinationInput</class>
- <widget class="QWidget" name="DestinationInput">
+ <class>Map</class>
+ <widget class="QWidget" name="Map">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -13,27 +13,17 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="btn_RouteCalculation">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>30</x>
      <y>20</y>
-     <width>241</width>
-     <height>81</height>
+     <width>201</width>
+     <height>61</height>
     </rect>
    </property>
    <property name="text">
-    <string>PushButton</string>
-   </property>
-  </widget>
-  <widget class="QListWidget" name="listWidget">
-   <property name="geometry">
-    <rect>
-     <x>290</x>
-     <y>20</y>
-     <width>361</width>
-     <height>451</height>
-    </rect>
+    <string>RouteCalculation</string>
    </property>
   </widget>
  </widget>
