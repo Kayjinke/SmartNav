@@ -8,3 +8,5 @@ add_subdirectory(script)
 
 add_subdirectory(src)
 
+add_subdirectory(db)
+

@@ -27,4 +27,6 @@ add_executable(NavigationService
 
 target_link_libraries(NavigationService CommonAPI CommonAPI-SomeIP vsomeip)
 
+install(TARGETS NavigationService DESTINATION bin)
+
 

@@ -1,3 +1,5 @@
 
 
 ./RouteCalculationService &
+
+./NavigationService &
