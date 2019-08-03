@@ -32,4 +32,6 @@ QT5_USE_MODULES(NavigationHMI Core Gui Widgets)
 
 target_link_libraries(NavigationHMI CommonAPI CommonAPI-SomeIP vsomeip)
 
+install(TARGETS NavigationHMI DESTINATION bin)
+
 

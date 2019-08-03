@@ -3,6 +3,11 @@
 
 #include <QWidget>
 
+#include <CommonAPI/CommonAPI.hpp>
+#include <v1/commonapi/RouteCalculationProxy.hpp>
+
+using namespace v1_0::commonapi;
+
 namespace Ui {
 class Map;
 }
@@ -21,6 +26,7 @@ private slots:
 
 private:
     Ui::Map *ui;
+    RouteCalculation::Shapepoints  m_Route;
 };
 
 #endif // map_H

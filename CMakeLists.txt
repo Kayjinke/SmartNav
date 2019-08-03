@@ -4,5 +4,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/module)
 
 add_subdirectory(fidl)
 
+add_subdirectory(script)
+
 add_subdirectory(src)
 

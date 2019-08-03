@@ -12,10 +12,10 @@ void RouteCalculationStubImpl::calcRoute(const std::shared_ptr<CommonAPI::Client
 
     RouteCalculation::Shapepoints shapepoints;
     
-    shapepoints.push_back(RouteCalculation::Shapepoint(5,5));
-    shapepoints.push_back(RouteCalculation::Shapepoint(5,6));
-    shapepoints.push_back(RouteCalculation::Shapepoint(5,7));
-    shapepoints.push_back(RouteCalculation::Shapepoint(5,100));
+    shapepoints.push_back(RouteCalculation::Shapepoint(300,100));
+    shapepoints.push_back(RouteCalculation::Shapepoint(350,150));
+    shapepoints.push_back(RouteCalculation::Shapepoint(400,250));
+    shapepoints.push_back(RouteCalculation::Shapepoint(700,400));
     _reply(shapepoints);
     
 };

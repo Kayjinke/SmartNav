@@ -47,5 +47,6 @@ if [ ! -d $_buildout_fullname ]
 fi
 
 cd $_buildout_fullname
-cmake $_fullname -DARCH=$arch
+cmake $_fullname -DARCH=$arch -DCMAKE_INSTALL_PREFIX=$_buildout_fullname/install
 make
+make install
