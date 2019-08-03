@@ -1,0 +1,30 @@
+import "platform:/plugin/org.genivi.commonapi.someip/deployment/CommonAPI-SOMEIP_deployment_spec.fdepl"
+import "Position.fidl"
+
+define org.genivi.commonapi.someip.deployment for interface commonapi.Position {
+    SomeIpServiceID = 6030
+    
+   attribute position{
+		SomeIpGetterID=2001
+		SomeIpSetterID=2002
+		SomeIpNotifierID=2003
+		SomeIpEventGroups={2003}
+    }
+    method setRoute {
+        SomeIpMethodID = 6080
+    }
+    method startDemo {
+        SomeIpMethodID = 6082
+    }
+    method stopDemo {
+        SomeIpMethodID = 6084
+    }
+
+}
+  
+define org.genivi.commonapi.someip.deployment for provider MyService {  
+    instance commonapi.Position {
+        InstanceId = "Position"
+        SomeIpInstanceID = 22138
+    }
+} 
