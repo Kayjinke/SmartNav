@@ -15,3 +15,6 @@ FDEPLGenerate(Navigation.fdepl)
 FIDLGenerate(RouteCalculation.fidl)
 FDEPLGenerate(RouteCalculation.fdepl)
 
+FIDLGenerate(Position.fidl)
+FDEPLGenerate(Position.fdepl)
+

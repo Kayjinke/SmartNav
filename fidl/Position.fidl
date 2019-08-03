@@ -1,0 +1,30 @@
+package commonapi
+  
+interface Position {
+    version {
+        major 1 minor 0
+    }
+    
+    struct Shapepoint
+    {
+        Int32 lon
+        Int32 lat
+    }
+    
+    array Shapepoints of Shapepoint
+
+	attribute Shapepoint position
+        
+    method setRoute {
+        in {
+           Shapepoints route
+         }
+    }
+
+    method startDemo {
+    }
+
+	method stopDemo {
+    }
+}
+
