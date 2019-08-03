@@ -7,7 +7,8 @@
 
 using namespace std;
 
-static std::shared_ptr<RouteCalculationProxy<>> myProxy;
+static std::shared_ptr<RouteCalculationProxy<>> myRouteCalcProxy;
+static std::shared_ptr<PositionProxy<>> myPosProxy;
 
 MapWidget::MapWidget(QWidget *parent) :
     QWidget(parent),
@@ -21,40 +22,67 @@ MapWidget::~MapWidget()
     delete ui;
 }
 
+void MapWidget::on_position_change(::v1::commonapi::Position::Shapepoint pos)
+{
+     cout << "pos lon: " << pos.getLon() << " lat: " << pos.getLat() << endl;
+}
 
 void MapWidget::on_btn_RouteCalculation_clicked()
 {
-
      std::shared_ptr < CommonAPI::Runtime > runtime = CommonAPI::Runtime::get();
-     std::shared_ptr<RouteCalculationProxy<>> myProxy =
-     runtime->buildProxy<RouteCalculationProxy>("local", "calcRoute");
-
-     std::cout << "Checking availability!" << std::endl;
-
-     if (!myProxy)
      {
-         cout << "this is a null pointer" << endl;
-         return;
+        std::shared_ptr<PositionProxy<>> myPosProxy =
+         runtime->buildProxy<PositionProxy>("local", "Position");
+
+         std::cout << "Checking position availability!" << std::endl;
+
+         if (!myPosProxy)
+         {
+             cout << "this is a null pointer" << endl;
+             return;
+         }
+
+         while (!myPosProxy->isAvailable())
+             usleep(10);
+         cout << "PositionProxy available" << endl;
+         myPosProxy->getPositionAttribute().getChangedEvent().subscribe(
+           std::bind(&MapWidget::on_position_change, this, std::placeholders::_1)
+         );
      }
 
-     while (!myProxy->isAvailable())
-         usleep(10);
-     std::cout << "Available..." << std::endl;
+     {
      
-     RouteCalculation::Shapepoint startpoint;
-     RouteCalculation::Shapepoint endpoint;
-     RouteCalculation::Shapepoints route;
-     CommonAPI::CallInfo info(1000);
+ 
+         std::shared_ptr<RouteCalculationProxy<>> myRouteCalcProxy =
+         runtime->buildProxy<RouteCalculationProxy>("local", "calcRoute");
 
-     CommonAPI::CallStatus callStatus;
+         std::cout << "Checking route availability!" << std::endl;
 
-     std::cout << "Call route with synchronous semantics ---> ..." << std::endl;
-     myProxy->calcRoute(startpoint, endpoint, callStatus, route);
-     std::cout << "ddd" << std::endl;
-     
-     m_Route.swap(route);
-     
-     update();
+         if (!myRouteCalcProxy)
+         {
+             cout << "this is a null pointer" << endl;
+             return;
+         }
+
+         while (!myRouteCalcProxy->isAvailable())
+             usleep(10);
+         cout << "RouteCalculationProxy available" << endl;
+         
+         RouteCalculation::Shapepoint startpoint;
+         RouteCalculation::Shapepoint endpoint;
+         RouteCalculation::Shapepoints route;
+         CommonAPI::CallInfo info(1000);
+
+         CommonAPI::CallStatus callStatus;
+
+         std::cout << "Call route with synchronous semantics ---> ..." << std::endl;
+         myRouteCalcProxy->calcRoute(startpoint, endpoint, callStatus, route);
+         std::cout << "ddd" << std::endl;
+         
+         m_Route.swap(route);
+         
+         update();
+     }
 }
 
 void MapWidget::paintEvent(QPaintEvent *event)

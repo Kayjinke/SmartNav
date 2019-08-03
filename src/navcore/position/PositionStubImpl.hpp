@@ -15,7 +15,7 @@ public:
     virtual void startDemo(const std::shared_ptr<CommonAPI::ClientId> _client, startDemoReply_t _reply);
     virtual void stopDemo(const std::shared_ptr<CommonAPI::ClientId> _client, stopDemoReply_t _reply);
 private:
-    static void demo_thread_func();
+    static void demo_thread_func(void* data);
 
 private:
      static bool     m_IsStart;

@@ -39,32 +39,6 @@
     <string>Route Calculation</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_4">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>260</y>
-     <width>241</width>
-     <height>91</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Destination Input</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_5">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>380</y>
-     <width>241</width>
-     <height>91</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Destination Input</string>
-   </property>
-  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>

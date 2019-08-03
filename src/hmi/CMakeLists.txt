@@ -26,6 +26,8 @@ add_executable(NavigationHMI ${NavigationHMI_SOURCES} ${NavigationHMI_HEADERS} $
 	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/NavigationSomeIPDeployment.cpp    
 	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/RouteCalculationSomeIPProxy.cpp
 	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/RouteCalculationSomeIPDeployment.cpp
+	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/PositionSomeIPProxy.cpp
+	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/PositionSomeIPDeployment.cpp
 	)
 
 QT5_USE_MODULES(NavigationHMI Core Gui Widgets)

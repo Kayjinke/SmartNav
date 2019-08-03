@@ -7,6 +7,7 @@
 #include <CommonAPI/CommonAPI.hpp>
 #include <v1/commonapi/NavigationProxy.hpp>
 #include <v1/commonapi/RouteCalculationProxy.hpp>
+#include <v1/commonapi/PositionProxy.hpp>
 #include <unistd.h>
 
 using namespace std;
@@ -20,6 +21,7 @@ Widget::Widget(QWidget *parent) :
     connect(ui->btn_destinationinput, SIGNAL(clicked()), this, SLOT(on_destinationinput_btn_clicked()));
     
     connect(ui->btn_routecalculation, SIGNAL(clicked()), this, SLOT(on_routecalculation_btn_clicked()));
+    
 }
 
 Widget::~Widget()
