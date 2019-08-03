@@ -4,6 +4,12 @@ import "Position.fidl"
 define org.genivi.commonapi.someip.deployment for interface commonapi.Position {
     SomeIpServiceID = 6030
     
+   attribute position{
+		SomeIpGetterID=2001
+		SomeIpSetterID=2002
+		SomeIpNotifierID=2003
+		SomeIpEventGroups={2003}
+    }
     method setRoute {
         SomeIpMethodID = 6080
     }
@@ -13,6 +19,7 @@ define org.genivi.commonapi.someip.deployment for interface commonapi.Position {
     method stopDemo {
         SomeIpMethodID = 6084
     }
+
 }
   
 define org.genivi.commonapi.someip.deployment for provider MyService {  
