@@ -14,12 +14,16 @@ public:
 	virtual void setRoute(const std::shared_ptr<CommonAPI::ClientId> _client, Position::Shapepoints _route, setRouteReply_t _reply);
     virtual void startDemo(const std::shared_ptr<CommonAPI::ClientId> _client, startDemoReply_t _reply);
     virtual void stopDemo(const std::shared_ptr<CommonAPI::ClientId> _client, stopDemoReply_t _reply);
+    
+    Position::Shapepoint getNextPoint();
+    bool  isDone();
 private:
     static void demo_thread_func(void* data);
 
 private:
-     static bool     m_IsStart;
      std::thread*    m_DemoThread;
+     Position::Shapepoints  m_Route;
+     int             m_CurrentIdx;
             
 };
 #endif /* POSITIONSTUBIMPL_H_ */

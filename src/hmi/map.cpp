@@ -51,8 +51,6 @@ void MapWidget::on_btn_RouteCalculation_clicked()
      }
 
      {
-     
- 
          std::shared_ptr<RouteCalculationProxy<>> myRouteCalcProxy =
          runtime->buildProxy<RouteCalculationProxy>("local", "calcRoute");
 
@@ -76,7 +74,17 @@ void MapWidget::on_btn_RouteCalculation_clicked()
          CommonAPI::CallStatus callStatus;
 
          std::cout << "Call route with synchronous semantics ---> ..." << std::endl;
+        
          myRouteCalcProxy->calcRoute(startpoint, endpoint, callStatus, route);
+         
+         Position::Shapepoints pos_route;
+         
+         for(RouteCalculation::Shapepoints::iterator iter = route.begin(); iter != route.end(); iter++)
+         {
+             pos_route.push_back(Position::Shapepoint(iter->getLon(), iter->getLat()));
+         }
+         myPosProxy->setRoute(pos_route, callStatus);
+         myPosProxy->startDemo(callStatus);
          std::cout << "ddd" << std::endl;
          
          m_Route.swap(route);
@@ -90,7 +98,6 @@ void MapWidget::paintEvent(QPaintEvent *event)
      QPainter painter(this);
      painter.setPen(Qt::blue);
      painter.setFont(QFont("Arial", 50));
-     //painter.drawLine(100,100,500,500);
      QPainterPath path;
      
      if (m_Route.size() < 2)
@@ -106,8 +113,6 @@ void MapWidget::paintEvent(QPaintEvent *event)
          //std::cout << "route lon: " << (*iter).getLon() << " route lat:" << (*iter).getLat() << endl;
          iter++;
          path.lineTo(iter->getLon(), iter->getLat());
-         
-        
      }
      while(iter != m_Route.end() - 1);
      painter.drawPath(path);

@@ -3,13 +3,15 @@
 
 #include <map>
 #include <vector>
+#include <string>
 
+using namespace std;
 struct Wgs84Pos
 {
-    Wgs84Pos(int a, int b)
+    Wgs84Pos(float a, float b)
     : lon(a), lat(b) {}
-    int lon;
-    int lat;
+    float lon;
+    float lat;
 };
 
 typedef std::vector<Wgs84Pos> Wgs84PosList;
@@ -17,7 +19,7 @@ typedef std::map<long, Wgs84Pos>::iterator Wgs84PosMapIter;
 
 struct Road
 {
-   Road(int a, const Wgs84PosList& list)
+   Road(long a, const Wgs84PosList& list)
    : id(a), shapePoints(list)
    {}
    
@@ -35,7 +37,20 @@ public:
     
 private:
     std::map<long, Wgs84Pos> m_ShapePoints;
-    std::map<long, Road> m_Roads;
+    std::map<long, Road> m_Roads;  
 };
+
+class DataRead
+{
+public:
+    DataRead();
+    bool shapepoint_read(std::string filename);
+    bool road_read(std::string filename);
+
+private:
+    std::map<long, Wgs84Pos> r_ShapePoints;
+    std::map<long, Road> r_Roads;
+};
+
 
 #endif /*dataacess_h*/

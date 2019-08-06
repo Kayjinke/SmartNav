@@ -11,6 +11,8 @@
 
 #include <iostream>
 #include <fstream>
+#include <iomanip>
+
 
 using Poco::XML::DOMParser;
 using Poco::XML::InputSource;
@@ -43,15 +45,15 @@ bool DataAcess::open_database()
         {
             NodeList* nl = pDoc->getElementsByTagName("node");
             cout << "points count: " << nl->length() << endl;
-            for (long i = 0; i < nl->length(); i++)
+            for (long i = 0; i < 50; i++)
             {
                 Node* node = nl->item(i);
                 NamedNodeMap* nm = node->attributes();
                 if(nm)
 			    {
 			        long id = 0;
-			        int lon = 0;
-			        int lat = 0;
+			        float lon = 0;
+			        float lat = 0;
 				    for(int j = 0; j < nm->length() ; j++)
 				    {
 					    Node* attr = nm->item(j);
@@ -61,22 +63,56 @@ bool DataAcess::open_database()
                         }
 					    if (attr->nodeName() == "lat")
 					    {
-					        lat  = atol(attr->nodeValue().c_str());
+					        //const char* lat1 = attr->nodeValue().c_str();
+					        //lat  = atof(lat1);
+					        //cout << "lat1:" << lat1 << "  ,lat: "<< lat << endl;
+					        lat = atof(attr->nodeValue().c_str());
+					        
                         }
                         if (attr->nodeName() == "lon")
 					    {
-					        lon = atol(attr->nodeValue().c_str());
+					        lon = atof(attr->nodeValue().c_str());
                         }
 				    }
-				    cout << "create points " << i << " " << id << endl;
-				    m_ShapePoints.insert(std::pair<int, Wgs84Pos>(id, Wgs84Pos(lon, lat)));
+				    //cout << fixed;
+				    cout << "Create points " << i << " id : " << id  <<" , Lon: " << showpoint << lon << " , Lat: " << setprecision(9) << lat << endl;
+				    m_ShapePoints.insert(std::pair<long, Wgs84Pos>(id, Wgs84Pos(lon, lat)));
+
 			    }
             } 
         } 
+        
         cout << "parse shape point OK" << endl;
+        cout << " size : " << sizeof(m_ShapePoints) <<  endl;
+        
+// shapepoints are written into a file ,method 1:
+        ofstream outfile;
+        outfile.open("shapepoints.txt", ios::out | ios::binary);
+        std::map<long, Wgs84Pos>::iterator iter;
+        iter = m_ShapePoints.begin();
+        while(iter!=m_ShapePoints.end())
+        {
+            outfile.write((char*)&iter->first,sizeof(long));
+            outfile.write((char*)&iter->second, sizeof(Wgs84Pos));
+            iter++;
+        }
+        outfile.close();
+        cout << " ShapePoints write over " << endl; 
+
+       
+        // shapepoints are written into a file ,method 2:
+        /*ofstream outfile1;
+        outfile1.open("test1.txt", ios::out | ios::binary);
+        for(Wgs84PosMapIter iter = m_ShapePoints.begin(); iter != m_ShapePoints.end(); iter++)
+        {
+            outfile1 << iter->first << iter->second.lon << iter->second.lat << endl;
+        }
+        outfile1.close();*/
+               
         {
             NodeList* nl = pDoc->getElementsByTagName("way");
-            for (int i = 0; i < nl->length(); i++)
+            cout << "ways count: " << nl->length() << endl;
+            for (int i = 0; i < 30; i++)
             {
                 long wayId = 0;
                 Wgs84PosList points;
@@ -128,10 +164,38 @@ bool DataAcess::open_database()
 				       }
 				    }
 				    cout << "create road " << wayId << endl;
-				    m_Roads.insert(std::pair<int, Road>(wayId, Road(wayId, points)));
+                    for(std::vector<Wgs84Pos>::iterator iter = points.begin(); iter != points.end(); iter++)
+                    {
+                        cout << "points lon: " << iter->lon << " , lat: " << iter->lat << endl;
+                    }
+                    				    
+				    m_Roads.insert(std::pair<long, Road>(wayId, Road(wayId, points)));
 			    }
             } 
-        }       
+        } 
+    
+	        
+        for(RoadMapIter iter = m_Roads.begin(); iter != m_Roads.end(); iter++)
+        {
+             cout << "WayId: " << iter->first <<  ", road id: " << iter->second.id << " ,shape points count: " << iter->second.shapePoints.size() << endl;
+        }   
+                  
+        ofstream outfile1;
+        outfile1.open("routes.txt", ios::out | ios::binary);
+        std::map<long, Road>::iterator iter1;
+        iter1 = m_Roads.begin();
+        while(iter1 != m_Roads.end())
+        {
+            outfile1.write((char*)&iter1->first,sizeof(long));
+            //outfile1.write((char*)&iter1->second,sizeof(iter1->second));
+            outfile1.write((char*)&iter1->second.id, sizeof(iter1->second.id));
+            outfile1.write((char*)&iter1->second.shapePoints, sizeof(iter1->second.shapePoints));
+            iter1++;
+        }
+        outfile1.close();
+        cout << " Roads write over " << endl;    
+        
+   
  
     }  
     catch (Exception& exc)  
@@ -139,8 +203,7 @@ bool DataAcess::open_database()
         std::cerr << exc.displayText() << std::endl;  
     } 
     
-    for(RoadMapIter iter = m_Roads.begin(); iter != m_Roads.end(); iter++)
-    {
-         cout << "road id: " << iter->second.id << "shape points count: " << iter->second.shapePoints.size() << endl;
-    }
+    
+  
+ 
 }

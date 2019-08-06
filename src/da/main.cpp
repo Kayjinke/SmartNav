@@ -8,5 +8,6 @@ int main()
     cout << "dataacess test application" << endl;
     DataAcess da;
     da.open_database();
+       
     return 0;
 }
