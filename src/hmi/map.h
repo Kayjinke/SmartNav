@@ -31,6 +31,8 @@ private:
     Ui::Map *ui;
     RouteCalculation::Shapepoints  m_Route;
     Position::Shapepoint           m_CarPosition;
+    std::shared_ptr<RouteCalculationProxy<>> myRouteCalcProxy;
+    std::shared_ptr<PositionProxy<>> myPosProxy;
 };
 
 #endif // map_H
