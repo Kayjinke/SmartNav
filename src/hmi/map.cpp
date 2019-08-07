@@ -7,9 +7,6 @@
 
 using namespace std;
 
-static std::shared_ptr<RouteCalculationProxy<>> myRouteCalcProxy;
-static std::shared_ptr<PositionProxy<>> myPosProxy;
-
 MapWidget::MapWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Map)
@@ -31,8 +28,7 @@ void MapWidget::on_btn_RouteCalculation_clicked()
 {
      std::shared_ptr < CommonAPI::Runtime > runtime = CommonAPI::Runtime::get();
      {
-        std::shared_ptr<PositionProxy<>> myPosProxy =
-         runtime->buildProxy<PositionProxy>("local", "Position");
+         myPosProxy = runtime->buildProxy<PositionProxy>("local", "Position");
 
          std::cout << "Checking position availability!" << std::endl;
 
@@ -51,8 +47,7 @@ void MapWidget::on_btn_RouteCalculation_clicked()
      }
 
      {
-         std::shared_ptr<RouteCalculationProxy<>> myRouteCalcProxy =
-         runtime->buildProxy<RouteCalculationProxy>("local", "calcRoute");
+         myRouteCalcProxy = runtime->buildProxy<RouteCalculationProxy>("local", "calcRoute");
 
          std::cout << "Checking route availability!" << std::endl;
 

@@ -47,7 +47,7 @@ bool  PositionStubImpl::isDone()
 
 Position::Shapepoint PositionStubImpl::getNextPoint()
 {
-    if (m_CurrentIdx < m_Route.size() - 1)
+    if (m_CurrentIdx < m_Route.size() -1)
     {
        return m_Route[++m_CurrentIdx];
     }
