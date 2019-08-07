@@ -4,14 +4,16 @@
 #include <map>
 #include <vector>
 #include <string>
+#include <algorithm>
+
 
 using namespace std;
 struct Wgs84Pos
 {
-    Wgs84Pos(float a, float b)
+    Wgs84Pos(double a, double b)
     : lon(a), lat(b) {}
-    float lon;
-    float lat;
+    double lon;
+    double lat;
 };
 
 typedef std::vector<Wgs84Pos> Wgs84PosList;
@@ -29,6 +31,7 @@ struct Road
 
 typedef std::map<long, Road>::iterator RoadMapIter;
 
+
 class DataAcess
 {
 public:
@@ -40,6 +43,18 @@ private:
     std::map<long, Road> m_Roads;  
 };
 
+struct Route
+{
+   Route(int a, const Wgs84PosList& list)
+   : count(a), shapePoints(list)
+   {}
+   
+   int count;
+   std::vector<Wgs84Pos> shapePoints;
+};
+
+typedef std::map<long, Route>::iterator RouteMapIter;
+
 class DataRead
 {
 public:
@@ -47,9 +62,10 @@ public:
     bool shapepoint_read(std::string filename);
     bool road_read(std::string filename);
 
+
 private:
     std::map<long, Wgs84Pos> r_ShapePoints;
-    std::map<long, Road> r_Roads;
+    std::map<long, Route> r_Roads;
 };
 
 
