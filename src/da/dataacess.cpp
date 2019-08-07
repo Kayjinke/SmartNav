@@ -13,7 +13,7 @@ DataRead::DataRead()
 
 bool DataRead::shapepoint_read(string filename)
 {
-    long id = 0;
+    long   id = 0;
     double lon = 0;
     double lat = 0;
     double fnl_lon = 0;
@@ -28,12 +28,9 @@ bool DataRead::shapepoint_read(string filename)
     double new_x;
     double new_y;
     // 所取地图的实际坐标范围
-    double axis_xmin = -118.2156947;
-    double axis_ymax = 34.0644870;
-    double axis_xmax = -118.2000054; 
-    double axis_ymin = 34.0839314;
+
     
-    //定义QT上坐标轴的x和y范围以及地图信息的坐标范围；
+    //定义Qt上坐标轴的x和y范围以及地图信息的坐标范围；
     double x = 800;
     double y = 480;
     double axis_x ;
@@ -100,15 +97,18 @@ bool DataRead::shapepoint_read(string filename)
     {   
         max_lat = *max_element(AllLat.begin(), AllLat.end());
         min_lat = *min_element(AllLat.begin(), AllLat.end());  
-    }
+    }   Mpa points lon: -118.2078319 , lat: 34.0755396
+   Mpa points lon: -118.2090966 , lat: 34.0755199
+   Mpa points lon: -118.2104038 , lat: 34.0754996
+   Mpa points lon: -118.2117936 , lat: 34.0754780
+   Mpa points lon: -118.2131035 , lat: 34.0754577
+
     cout << fixed;    
     cout << "max_Lat: " << setprecision(7) << max_lat << ", min_Lat: " << setprecision(7) << min_lat << endl;*/     
 
 
 }
-
-
-    
+ 
 
 bool DataRead::road_read(string filename)
 {
@@ -118,6 +118,7 @@ bool DataRead::road_read(string filename)
     double lat = 0;
     Wgs84PosList poslist;
     Wgs84Pos posNodes(lon, lat);
+
     
     ifstream filestream;
     ifstream infile(filename, ios::in | ios::binary);
@@ -128,28 +129,22 @@ bool DataRead::road_read(string filename)
     
     while(!infile.eof())
     {
-        infile.read((char*)&wayid,sizeof(long));
-        infile.read((char*)&count,sizeof(8));   
-
+        infile.read((char*)&wayid, 8);
+        infile.read((char*)&count, 4);
         
-        for(std::vector<Wgs84Pos>::iterator iter = poslist.begin(); iter != poslist.end(); iter++)
+        cout << "wayid" << wayid << "count" << count << endl;
+
+        for(int i = 0; i < count; i++)
         {
             infile.read((char*)&lon,sizeof(double));
             infile.read((char*)&lat,sizeof(double));
             posNodes.lon = lon;
             posNodes.lat = lat;
             poslist.push_back(posNodes);
-
         }
-        
         Route route(count, poslist);
+        
         r_Roads.insert(make_pair(wayid, route));
     }
     cout << " reading roads...  The counter :" << r_Roads.size() << " sizeof: " << sizeof(r_Roads) << " bytes" << endl;
- 
-    for(RouteMapIter iter = r_Roads.begin(); iter != r_Roads.end(); iter++)
-        {
-         cout << "read road id : " << iter->first << " point count: " << iter->second.count << endl;
-        
-    }
 }

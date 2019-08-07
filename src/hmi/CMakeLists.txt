@@ -11,6 +11,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(${Qt5Widgets_INCLUDE_DIRS})
+include_directories(${CMAKE_SOURCE_DIR}/src/da)
 
 
 SET(NavigationHMI_SOURCES main.cpp widget.cpp destinationinput.cpp map.cpp)
@@ -32,7 +33,7 @@ add_executable(NavigationHMI ${NavigationHMI_SOURCES} ${NavigationHMI_HEADERS} $
 
 QT5_USE_MODULES(NavigationHMI Core Gui Widgets)
 
-target_link_libraries(NavigationHMI CommonAPI CommonAPI-SomeIP vsomeip)
+target_link_libraries(NavigationHMI dataacess CommonAPI CommonAPI-SomeIP vsomeip)
 
 install(TARGETS NavigationHMI DESTINATION bin)
 

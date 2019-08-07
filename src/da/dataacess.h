@@ -62,6 +62,7 @@ public:
     bool shapepoint_read(std::string filename);
     bool road_read(std::string filename);
 
+    std::map<long, Route> getAllRoads() { return r_Roads; }
 
 private:
     std::map<long, Wgs84Pos> r_ShapePoints;

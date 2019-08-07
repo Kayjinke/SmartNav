@@ -146,8 +146,7 @@ bool DataAcess::open_database()
 				    }
 				    cout << "create road " << wayId << "  Contains:" << endl;
 				    m_Roads.insert(std::pair<long, Road>(wayId, Road(wayId, points)));
-				    
-				    
+
                     //for(std::vector<Wgs84Pos>::iterator iter = points.begin(); iter != points.end(); iter++)
                     //{
                     //    cout << "     points lon: " << iter->lon << " , lat: " << iter->lat << endl;
@@ -170,20 +169,21 @@ bool DataAcess::open_database()
         outfile1.open("routes.txt", ios::out | ios::binary);
         std::map<long, Road>::iterator iter1;
         iter1 = m_Roads.begin();
+        //Wgs84PosList pointlist;
         while(iter1 != m_Roads.end())
         {
-            //outfile1.write((char*)&iter1->first,sizeof(long));
             int count = iter1->second.shapePoints.size();
-            outfile1.write((char*)&iter1->second.id, sizeof(iter1->second.id));
-            outfile1.write((char*)(&count), sizeof(8));
+            outfile1.write((char*)&iter1->second.id, 8);
+            outfile1.write((char*)(&count), 4);
             for(std::vector<Wgs84Pos>::iterator iter_2 = iter1->second.shapePoints.begin(); iter_2 != iter1->second.shapePoints.end(); iter_2++)
             {
 
                 outfile1.write((char*)&iter_2->lon, sizeof(iter_2->lon));
-                outfile1.write((char*)&iter_2->lat, sizeof(iter_2->lat)); 
-                cout <<  "Write wayid=: " << iter1->second.id << " ,  count=: " << count << " , current lon=: "  << iter_2->lon << " , lat=: " << iter_2->lat <<  endl;
+                outfile1.write((char*)&iter_2->lat, sizeof(iter_2->lat));
+               cout << " , current lon=: "  << iter_2->lon << " , lat=: " << iter_2->lat << endl;
             }
             iter1++;
+            cout <<  "Write wayid=: " << iter1->second.id << " ,  count=: " << count << endl;
            
         }
         outfile1.close();

@@ -1,22 +1,16 @@
 cmake_minimum_required(VERSION 2.8)
 
-add_library(dataacess SHARED dataaccess.cpp)
+project(da)
 
-target_link_libraries(dataacess PocoXML PocoFoundation)
+add_library(dataacess dataacess.cpp)
 
-add_executable(dataacess_test main.cpp)
+add_executable(da_compiler da_compiler.cpp da_compiler_util.cpp)
 
-target_link_libraries(dataacess_test dataacess)
+target_link_libraries(da_compiler PocoXML PocoFoundation)
 
+add_executable(da_test da_test.cpp)
 
+target_link_libraries(da_test dataacess)
 
-
-add_library(datareadLib SHARED dataread.cpp)
-
-add_executable(dataread main2.cpp dataread.cpp)
-
-target_link_libraries(dataread datareadLib dataacess)
-
-install(TARGETS dataacess DESTINATION bin)
-install(TARGETS dataacess_test DESTINATION bin)
-install(TARGETS dataread DESTINATION bin)
+install(TARGETS da_compiler DESTINATION bin)
+install(TARGETS da_test DESTINATION bin)
