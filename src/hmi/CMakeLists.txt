@@ -22,8 +22,8 @@ qt5_wrap_ui(NavigationHMI_FORMS_HEADERS ${NavigationHMI_FORMS})
 
 
 add_executable(NavigationHMI ${NavigationHMI_SOURCES} ${NavigationHMI_HEADERS} ${NavigationHMI_HEADERS_MOC} ${NavigationHMI_HEADERS_MOC}
-	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/NavigationSomeIPProxy.cpp
-	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/NavigationSomeIPDeployment.cpp    
+	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/DestinationInputSomeIPProxy.cpp
+	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/DestinationInputSomeIPDeployment.cpp    
 	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/RouteCalculationSomeIPProxy.cpp
 	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/RouteCalculationSomeIPDeployment.cpp
 	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/PositionSomeIPProxy.cpp

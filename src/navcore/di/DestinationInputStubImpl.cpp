@@ -1,17 +1,14 @@
-// HelloWorldStubImpl.cpp
-#include "NavigationStubImpl.hpp"
+#include "DestinationInputStubImpl.hpp"
 
-NavigationStubImpl::NavigationStubImpl()  { }
-NavigationStubImpl::~NavigationStubImpl() { }
+using namespace v1::commonapi;
 
-void NavigationStubImpl::foo(const std::shared_ptr<CommonAPI::ClientId> _client,
-                int32_t _x1,
-                std::string _x2,
-                fooReply_t _reply) {
+DestinationInputStubImpl::DestinationInputStubImpl()  { }
+DestinationInputStubImpl::~DestinationInputStubImpl() { }
 
-    std::cout << "foo called, setting new values." << std::endl;
-
-    int32_t y1 = 86;
-    std::string y2 = "xyz";
-    _reply(y1, y2);
-};
+void DestinationInputStubImpl::getAllStreets(const std::shared_ptr<CommonAPI::ClientId> _client, getAllStreetsReply_t _reply)
+{
+     DestinationInput::Stringlist streets;
+     streets.push_back("renmin street");
+     streets.push_back("jiading strret");
+     _reply(streets);  
+}

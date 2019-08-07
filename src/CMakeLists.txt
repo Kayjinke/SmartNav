@@ -8,9 +8,6 @@ include_directories(
     /usr/local/include/vsomeip
 )
 
-add_subdirectory(Hello)
-add_subdirectory(Navigation)
-
 #add_subdirectory(da)
 add_subdirectory(hmi)
 add_subdirectory(navcore)

@@ -5,7 +5,7 @@
 #include <iostream>
 #include <QPainter>
 #include <CommonAPI/CommonAPI.hpp>
-#include <v1/commonapi/NavigationProxy.hpp>
+#include <v1/commonapi/DestinationInputProxy.hpp>
 #include <v1/commonapi/RouteCalculationProxy.hpp>
 #include <v1/commonapi/PositionProxy.hpp>
 #include <unistd.h>

@@ -1,4 +1,3 @@
-// HelloWorldService.cpp
 #include <iostream>
 #include <thread>
 #include <CommonAPI/CommonAPI.hpp>
@@ -8,10 +7,9 @@ using namespace std;
 
 int main() {
     std::shared_ptr<CommonAPI::Runtime> runtime = CommonAPI::Runtime::get();
-    std::shared_ptr<DestinationInputStubImpl> myService =
-    	std::make_shared<DestinationInputStubImpl>();
-    runtime->registerService("local", "inputdestination", myService);
-    std::cout << "Successfully Registered Service!" << std::endl;
+    std::shared_ptr<DestinationInputStubImpl> myService = std::make_shared<DestinationInputStubImpl>();
+    runtime->registerService("local", "destinationinput", myService);
+    std::cout << "Successfully Registered Service for destinationinput!" << std::endl;
 
     while (true) {
         

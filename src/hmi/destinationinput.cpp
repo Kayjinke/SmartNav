@@ -3,7 +3,7 @@
 #include <iostream>
 #include <QPainter>
 #include <CommonAPI/CommonAPI.hpp>
-#include <v1/commonapi/NavigationProxy.hpp>
+#include <v1/commonapi/DestinationInputProxy.hpp>
 #include <unistd.h>
 
 using namespace std;
@@ -11,7 +11,7 @@ using namespace std;
 using namespace v1_0::commonapi;
 
 
-static std::shared_ptr<NavigationProxy<>> myProxy;
+static std::shared_ptr<DestinationInputProxy<>> myProxy;
 
 DestinationInputWidget::DestinationInputWidget(QWidget *parent) :
     QWidget(parent),
@@ -35,10 +35,8 @@ void DestinationInputWidget::paintEvent(QPaintEvent *event)
 void DestinationInputWidget::on_pushButton_clicked()
 {
 
-    std::shared_ptr < CommonAPI::Runtime > runtime = CommonAPI::Runtime::get();
-     std::shared_ptr<NavigationProxy<>> myProxy =
-         runtime->buildProxy<NavigationProxy>("local", "navigation");
-
+     std::shared_ptr < CommonAPI::Runtime > runtime = CommonAPI::Runtime::get();
+     std::shared_ptr<DestinationInputProxy<>> myProxy = runtime->buildProxy<DestinationInputProxy>("local", "destinationinput");
      std::cout << "Checking availability!" << std::endl;
 
      if (!myProxy)
@@ -50,26 +48,17 @@ void DestinationInputWidget::on_pushButton_clicked()
      while (!myProxy->isAvailable())
          usleep(10);
      std::cout << "Available..." << std::endl;
-     
-    int32_t value = 0;
-    int32_t inX1 = 5;
-    std::string inX2 = "abc";
-    int32_t outY1;
-    std::string outY2;
-
     CommonAPI::CallInfo info(1000);
-
-
     CommonAPI::CallStatus callStatus;
-    Navigation::Stringlist streets;
-
-    std::cout << "Call foo with synchronous semantics ---> ..." << std::endl;
+    DestinationInput::Stringlist streets;
+    std::cout << "Call getAllStreets with synchronous semantics ---> ..." << std::endl;
     myProxy->getAllStreets(callStatus, streets);
-    for(Navigation::Stringlist::iterator iter = streets.begin(); iter != streets.end(); iter++)
+    
+    for(DestinationInput::Stringlist::iterator iter = streets.begin(); iter != streets.end(); iter++)
     {
         std::cout << "street name" << *iter << endl;
         ui->listWidget->addItem(QString((*iter).c_str()));
     }
-    std::cout << "ddd" << std::endl;
+    std::cout <<"ending." << std::endl;
 
 }
