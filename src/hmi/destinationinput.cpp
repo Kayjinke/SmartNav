@@ -11,15 +11,11 @@ using namespace std;
 using namespace v1_0::commonapi;
 
 
-static std::shared_ptr<DestinationInputProxy<>> myProxy;
-
 DestinationInputWidget::DestinationInputWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::DestinationInput)
 {
     ui->setupUi(this);
-
-
 }
 
 DestinationInputWidget::~DestinationInputWidget()
@@ -30,6 +26,11 @@ DestinationInputWidget::~DestinationInputWidget()
 
 void DestinationInputWidget::paintEvent(QPaintEvent *event)
 {
+}
+
+void DestinationInputWidget::on_btn_diback_clicked()
+{
+    
 }
 
 void DestinationInputWidget::on_pushButton_clicked()
@@ -60,5 +61,7 @@ void DestinationInputWidget::on_pushButton_clicked()
         ui->listWidget->addItem(QString((*iter).c_str()));
     }
     std::cout <<"ending." << std::endl;
+    
+
 
 }

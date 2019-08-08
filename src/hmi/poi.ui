@@ -13,30 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="pushButton">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>131</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>StreetsList</string>
-   </property>
-  </widget>
-  <widget class="QListWidget" name="listWidget">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>20</y>
-     <width>421</width>
-     <height>131</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn_diback">
+  <widget class="QPushButton" name="btn_poiback">
    <property name="geometry">
     <rect>
      <x>670</x>

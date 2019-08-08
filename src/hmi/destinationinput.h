@@ -2,6 +2,12 @@
 #define destinationinput_H
 
 #include <QWidget>
+#include <CommonAPI/CommonAPI.hpp>
+#include <v1/commonapi/DestinationInputProxy.hpp>
+
+
+using namespace v1_0::commonapi;
+using namespace std;
 
 namespace Ui {
 class DestinationInput;
@@ -18,9 +24,14 @@ protected:
         void paintEvent(QPaintEvent *event);
 private slots:
         void on_pushButton_clicked();
+        void on_btn_diback_clicked();
+
+signals:
+        void mysignal();
 
 private:
     Ui::DestinationInput *ui;
+    std::shared_ptr<DestinationInputProxy<>> myProxy;
 };
 
 #endif // destinationinput_H

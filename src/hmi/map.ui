@@ -18,12 +18,82 @@
     <rect>
      <x>30</x>
      <y>20</y>
-     <width>201</width>
-     <height>61</height>
+     <width>141</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
     <string>RouteCalculation</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_mapback">
+   <property name="geometry">
+    <rect>
+     <x>670</x>
+     <y>430</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>15</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Back</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_Up">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>20</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Up</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_Up_2">
+   <property name="geometry">
+    <rect>
+     <x>570</x>
+     <y>60</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Up</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_Up_3">
+   <property name="geometry">
+    <rect>
+     <x>700</x>
+     <y>60</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Up</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_Up_4">
+   <property name="geometry">
+    <rect>
+     <x>640</x>
+     <y>100</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Up</string>
    </property>
   </widget>
  </widget>

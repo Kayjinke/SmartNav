@@ -22,6 +22,11 @@ bool DataRead::shapepoint_read(string filename)
     double max_lat = 0;
     double min_lon = 0;
     double min_lat = 0;
+    double axis_xmin  = -118.21228;
+    double axis_ymax = 34.07353;
+    double axis_xmax = -118.19955; 
+    double axis_ymin = 34.07951;
+
     
     double pos_y;
     double pos_x;
@@ -111,15 +116,7 @@ bool DataRead::shapepoint_read(string filename)
  
 
 bool DataRead::road_read(string filename)
-{
-    long wayid = 0;
-    int count = 0;
-    double lon = 0;
-    double lat = 0;
-    Wgs84PosList poslist;
-    Wgs84Pos posNodes(lon, lat);
-
-    
+{   
     ifstream filestream;
     ifstream infile(filename, ios::in | ios::binary);
     if(filestream.fail())
@@ -129,22 +126,32 @@ bool DataRead::road_read(string filename)
     
     while(!infile.eof())
     {
+        long wayid = 0;
+        int count = 0;
+        double lon = 0;
+        double lat = 0;    
         infile.read((char*)&wayid, 8);
         infile.read((char*)&count, 4);
         
-        cout << "wayid" << wayid << "count" << count << endl;
-
+        //cout << "wayid: " << wayid << ", count: " << count << endl;
+        Wgs84PosList poslist;
         for(int i = 0; i < count; i++)
         {
-            infile.read((char*)&lon,sizeof(double));
-            infile.read((char*)&lat,sizeof(double));
-            posNodes.lon = lon;
-            posNodes.lat = lat;
-            poslist.push_back(posNodes);
+            infile.read((char*)&lon, sizeof(double));
+            infile.read((char*)&lat, sizeof(double));
+            poslist.push_back(Wgs84Pos(lon, lat));
         }
         Route route(count, poslist);
-        
         r_Roads.insert(make_pair(wayid, route));
     }
     cout << " reading roads...  The counter :" << r_Roads.size() << " sizeof: " << sizeof(r_Roads) << " bytes" << endl;
+    /*for(std::map<long, Route>::iterator iter = r_Roads.begin(); iter != r_Roads.end(); iter++)
+    {
+        cout << iter->first  << "  " << iter->second.count << endl;
+        for(std::vector<Wgs84Pos>::iterator iter1 = iter->second.shapePoints.begin(); iter1 != iter->second.shapePoints.end(); iter1++)
+        {
+            cout << fixed;
+            cout << ", vector lon:" << setprecision(7) << iter1->lon << ", lat: " << iter1->lat << endl;
+        }
+    }*/
 }

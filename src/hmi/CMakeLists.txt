@@ -14,9 +14,9 @@ include_directories(${Qt5Widgets_INCLUDE_DIRS})
 include_directories(${CMAKE_SOURCE_DIR}/src/da)
 
 
-SET(NavigationHMI_SOURCES main.cpp widget.cpp destinationinput.cpp map.cpp)
-SET(NavigationHMI_HEADERS widget.h destinationinput.h map.h)
-SET(NavigationHMI_FORMS   widget.ui destinationinput.ui map.ui)
+SET(NavigationHMI_SOURCES main.cpp widget.cpp destinationinput.cpp map.cpp poi.cpp)
+SET(NavigationHMI_HEADERS widget.h destinationinput.h map.h poi.h)
+SET(NavigationHMI_FORMS   widget.ui destinationinput.ui map.ui poi.ui)
 
 qt5_wrap_cpp(NavigationHMI_HEADERS_MOC ${NavigationHMI_HEADERS})
 qt5_wrap_ui(NavigationHMI_FORMS_HEADERS ${NavigationHMI_FORMS})

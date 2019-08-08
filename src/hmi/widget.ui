@@ -16,10 +16,10 @@
   <widget class="QPushButton" name="btn_destinationinput">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>70</x>
      <y>30</y>
-     <width>241</width>
-     <height>91</height>
+     <width>271</width>
+     <height>161</height>
     </rect>
    </property>
    <property name="text">
@@ -29,14 +29,58 @@
   <widget class="QPushButton" name="btn_routecalculation">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>140</y>
-     <width>241</width>
-     <height>91</height>
+     <x>410</x>
+     <y>30</y>
+     <width>301</width>
+     <height>161</height>
     </rect>
    </property>
    <property name="text">
     <string>Route Calculation</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_Quit">
+   <property name="geometry">
+    <rect>
+     <x>670</x>
+     <y>430</y>
+     <width>91</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>14</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_POI">
+   <property name="geometry">
+    <rect>
+     <x>70</x>
+     <y>230</y>
+     <width>271</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>POI</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_weather">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>230</y>
+     <width>301</width>
+     <height>161</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Weather Information</string>
    </property>
   </widget>
  </widget>
