@@ -21,9 +21,9 @@ private:
     static void demo_thread_func(void* data);
 
 private:
-     std::thread*    m_DemoThread;
+     std::thread*           m_DemoThread;
      Position::Shapepoints  m_Route;
-     int             m_CurrentIdx;
+     int                    m_CurrentIdx;
             
 };
 #endif /* POSITIONSTUBIMPL_H_ */

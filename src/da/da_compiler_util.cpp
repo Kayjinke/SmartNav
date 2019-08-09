@@ -175,7 +175,6 @@ bool DataAcess::open_database()
             outfile1.write((char*)(&count), 4);
             for(std::vector<Wgs84Pos>::iterator iter_2 = iter1->second.shapePoints.begin(); iter_2 != iter1->second.shapePoints.end(); iter_2++)
             {
-
                 outfile1.write((char*)&iter_2->lon, sizeof(iter_2->lon));
                 outfile1.write((char*)&iter_2->lat, sizeof(iter_2->lat));
                cout << " , current lon=: "  << iter_2->lon << " , lat=: " << iter_2->lat << endl;

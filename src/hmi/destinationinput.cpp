@@ -6,16 +6,13 @@
 #include <v1/commonapi/DestinationInputProxy.hpp>
 #include <unistd.h>
 
-using namespace std;
-
-using namespace v1_0::commonapi;
-
-
 DestinationInputWidget::DestinationInputWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::DestinationInput)
 {
     ui->setupUi(this);
+    setWindowTitle("DestinationInput");
+    this->setAttribute(Qt::WA_DeleteOnClose,1);
 }
 
 DestinationInputWidget::~DestinationInputWidget()
@@ -30,7 +27,8 @@ void DestinationInputWidget::paintEvent(QPaintEvent *event)
 
 void DestinationInputWidget::on_btn_diback_clicked()
 {
-    
+    emit sendsignal();
+    this->close();
 }
 
 void DestinationInputWidget::on_pushButton_clicked()

@@ -5,7 +5,7 @@
 #include <QPushButton>
 
 namespace Ui {
-class Widget;
+class Poi;
 }
 
 class PoiWidget : public QWidget
@@ -18,10 +18,11 @@ public:
     ~PoiWidget();
 
 private:
-    QPushButton * subButton;
+    Ui::Poi *ui;
 
 private slots:
-    void changeSlot();
+    //void changeSlot();
+    void on_btn_back_clicked();
 
 signals:
     void mySignal();

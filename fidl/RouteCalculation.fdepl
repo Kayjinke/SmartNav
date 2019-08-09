@@ -5,13 +5,13 @@ define org.genivi.commonapi.someip.deployment for interface commonapi.RouteCalcu
     SomeIpServiceID = 6030
     
     method calcRoute {
-        SomeIpMethodID = 38000
+        SomeIpMethodID = 28000
     }
 }
   
 define org.genivi.commonapi.someip.deployment for provider MyService {  
     instance commonapi.RouteCalculation {
         InstanceId = "calcRoute"
-        SomeIpInstanceID = 39000
+        SomeIpInstanceID = 29000
     }
 } 

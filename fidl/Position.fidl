@@ -7,8 +7,8 @@ interface Position {
     
     struct Shapepoint
     {
-        Int32 lon
-        Int32 lat
+        Double lon
+        Double lat
     }
     
     array Shapepoints of Shapepoint

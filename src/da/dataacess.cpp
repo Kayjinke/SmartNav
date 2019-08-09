@@ -144,7 +144,9 @@ bool DataRead::road_read(string filename)
         Route route(count, poslist);
         r_Roads.insert(make_pair(wayid, route));
     }
-    cout << " reading roads...  The counter :" << r_Roads.size() << " sizeof: " << sizeof(r_Roads) << " bytes" << endl;
+    
+    //cout << " reading roads...  The counter :" << r_Roads.size() << " sizeof: " << sizeof(r_Roads) << " bytes" << endl;
+    
     /*for(std::map<long, Route>::iterator iter = r_Roads.begin(); iter != r_Roads.end(); iter++)
     {
         cout << iter->first  << "  " << iter->second.count << endl;

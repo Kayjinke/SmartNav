@@ -7,7 +7,6 @@
 #include <CommonAPI/CommonAPI.hpp>
 #include <v1/commonapi/RouteCalculationProxy.hpp>
 #include <v1/commonapi/PositionProxy.hpp>
-
 #include "dataacess.h"
 
 using namespace v1_0::commonapi;
@@ -16,11 +15,12 @@ namespace Ui {
 class Map;
 }
 
+class Widget;
 class MapWidget : public QWidget
 {
     Q_OBJECT
 public:
-    explicit MapWidget(QWidget *parent = 0);
+    explicit MapWidget(Widget *parent = 0);
     ~MapWidget();
     
 protected:
@@ -29,12 +29,21 @@ private slots:
     void on_btn_RouteCalculation_clicked();
     void on_btn_mapback_clicked();
     void on_btn_Up_clicked();
+    void on_btn_Down_clicked();
+    void on_btn_Left_clicked();
+    void on_btn_Right_clicked();
+    void on_btn_Map_clicked();
 private:
    void on_position_change(::v1::commonapi::Position::Shapepoint pos);
    void render_roads(QPainter* painter, const std::map<long, Route>& roads);
+   void render_vehicle(QPainter* painter);
+   void render_route(QPainter* painter);
    void render_road(QPainter* painter, const Route& roads);
-private:
+public:
     Ui::Map *ui;
+private:
+    Widget*                                  m_Parent;
+
     int                                      m_x_offset; 
     int                                      m_y_offset;                           
     QPixmap*                                 m_OfflinePixmap;

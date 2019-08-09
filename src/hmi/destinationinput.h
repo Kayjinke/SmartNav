@@ -27,7 +27,7 @@ private slots:
         void on_btn_diback_clicked();
 
 signals:
-        void mysignal();
+        void sendsignal();
 
 private:
     Ui::DestinationInput *ui;

@@ -5,13 +5,13 @@ define org.genivi.commonapi.someip.deployment for interface commonapi.Destinatio
     SomeIpServiceID = 6031
     
     method getAllStreets {
-        SomeIpMethodID = 38001
+        SomeIpMethodID = 28001
     }
 }
   
 define org.genivi.commonapi.someip.deployment for provider MyService {  
     instance commonapi.DestinationInput {
         InstanceId = "destinationinput"
-        SomeIpInstanceID = 39001
+        SomeIpInstanceID = 29001
     }
 } 
