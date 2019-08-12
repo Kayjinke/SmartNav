@@ -19,13 +19,17 @@ struct Wgs84Pos
 typedef std::vector<Wgs84Pos> Wgs84PosList;
 typedef std::map<long, Wgs84Pos>::iterator Wgs84PosMapIter;
 
+static const int road_type_normal = 0x0001;
+static const int road_type_area   = 0x0002;
+
 struct Road
 {
-   Road(long a, const Wgs84PosList& list)
+   Road(long a, int type, const Wgs84PosList& list)
    : id(a), shapePoints(list)
    {}
    
    long id;
+   int  type;
    std::vector<Wgs84Pos> shapePoints;
 };
 
@@ -40,16 +44,18 @@ public:
     
 private:
     std::map<long, Wgs84Pos> m_ShapePoints;
-    std::map<long, Road> m_Roads;  
+    std::map<long, Road> m_Roads;
+  
 };
 
 struct Route
 {
-   Route(int a, const Wgs84PosList& list)
+   Route(int a, int type, const Wgs84PosList& list)
    : count(a), shapePoints(list)
    {}
    
    int count;
+   int type;
    std::vector<Wgs84Pos> shapePoints;
 };
 

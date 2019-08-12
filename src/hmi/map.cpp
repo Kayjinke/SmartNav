@@ -11,9 +11,9 @@ using namespace std;
 
 
 static const double axis_xmin  = -118.21228;
-static const double axis_ymax = 34.07353;
+static const double axis_ymax = 34.07951;
 static const double axis_xmax = -118.19955; 
-static const double axis_ymin = 34.07951;
+static const double axis_ymin = 34.07353;
 static const double axis_x = axis_xmax - axis_xmin;
 static const double axis_y = axis_ymax - axis_ymin;
 static const int screen_width = 800;
@@ -63,6 +63,7 @@ void MapWidget::on_btn_Up_clicked()
 void MapWidget::on_btn_Down_clicked()
 {
     m_y_offset -= 5;
+    
     update();
 }
 

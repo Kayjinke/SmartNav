@@ -20,14 +20,20 @@ Widget::Widget(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("SmartNav");
-    
+    setWindowFlags (Qt::FramelessWindowHint);
     connect(ui->btn_destinationinput, SIGNAL(clicked()), this, SLOT(on_destinationinput_btn_clicked()));
     connect(ui->btn_routecalculation, SIGNAL(clicked()), this, SLOT(on_routecalculation_btn_clicked()));
     connect(ui->btn_POI, SIGNAL(clicked()), this, SLOT(on_Poi_btn_clicked()));
     connect(ui->btn_Quit, SIGNAL(clicked()), this, SLOT(on_Quit_btn_clicked())); 
-    connect(ui->btn_Quit, SIGNAL(clicked()), this, SLOT(on_Quit_btn_clicked()));     
+   
+    //QImage *image= new QImage("../image/background.jpg");  
+
+    //QPalette palette; 
+    //palette.setBrush(QPalette::Background,QBrush(QPixmap::fromImage(*image))); 
+    //this->setPalette(palette); 
     
     m_MapWidget = new MapWidget(this);
+    m_MapWidget->hide();
 
 }
 
@@ -40,12 +46,6 @@ Widget::~Widget()
 void Widget::reshow()
 {
     this->show();
-}
-
-void Widget::on_btn_map_back_clicked()
-{
-    m_MapWidget->hide();
-    show_all();
 }
 
 void Widget::hide_all()
@@ -67,16 +67,20 @@ void Widget::show_all()
      ui->btn_Quit->show();
 }
 
+void Widget::on_btn_map_back_clicked()
+{
+    m_MapWidget->hide();
+    show_all();
+}
+
 void Widget::paintEvent(QPaintEvent *event)
 {
 }
 
 void Widget::on_destinationinput_btn_clicked()
 {
-     //hide_all();
+     hide_all();
      QWidget* widget = new DestinationInputWidget(this);
-     connect(widget,SIGNAL(sendsignal()),this,SLOT(reshow()));
-     this->hide();
      widget->show();
 }
 

@@ -12,6 +12,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <string>
 
 
 using Poco::XML::DOMParser;
@@ -43,7 +44,7 @@ bool DataAcess::open_database()
         {
             NodeList* nl = pDoc->getElementsByTagName("node");
             cout << "points count: " << nl->length() << endl;
-            for (long i = 0; i < nl->length(); i++)
+            for (long i = 0; i < 50; i++)
             {
                 Node* node = nl->item(i);
                 NamedNodeMap* nm = node->attributes();
@@ -78,7 +79,7 @@ bool DataAcess::open_database()
         cout << " size : " << sizeof(m_ShapePoints) <<  endl; 
            
         ofstream outfile;
-        outfile.open("../data/shapepoints.txt", ios::out | ios::binary);
+        outfile.open("../data/shapepoints_test.txt", ios::out | ios::binary);
         std::map<long, Wgs84Pos>::iterator iter;
         iter = m_ShapePoints.begin();
         while(iter!=m_ShapePoints.end())
@@ -93,7 +94,7 @@ bool DataAcess::open_database()
         {
             NodeList* nl = pDoc->getElementsByTagName("way");
             cout << "ways count: " << nl->length() << endl;
-            for (int i = 0; i < nl->length(); i++)
+            for (int i = 0; i < 50; i++)
             {
                 long wayId = 0;
                 Wgs84PosList points;                
@@ -114,9 +115,12 @@ bool DataAcess::open_database()
 	                }
 	            }
 				                           
+    			cout << "create road " << wayId  << endl;
                 NodeList* cnl = node->childNodes();
                 if(cnl)
-			    {		        
+			    {		
+			        long first_ref = 0, last_ref = 0;
+			                
 				    for(int j = 0; j < cnl->length() ; j++)
 				    {
 					    Node* cn = cnl->item(j);
@@ -132,25 +136,33 @@ bool DataAcess::open_database()
 					                if (attr->nodeName() == "ref")
 					                {
 					                    ref  = atol(attr->nodeValue().c_str());
+					                    if (first_ref != 0)
+					                    {
+					                        first_ref = ref;
+					                    }
+					                    last_ref = ref;
+					                    cout << "first ref: " << first_ref << "last_ref: " << endl;
                                     }
 				                }
-				                //cout << "ref: " << ref << endl;
+				                cout << "ref: " << ref << endl;
 				                Wgs84PosMapIter iter = m_ShapePoints.find(ref);
 				                if (iter != m_ShapePoints.end())
 				                {
 				                     points.push_back(iter->second);
                                 }
-
 				            }
-				       }  
+				       }
 				    }
-				    cout << "create road " << wayId  << endl;
-				    m_Roads.insert(std::pair<long, Road>(wayId, Road(wayId, points)));
-
-                    //for(std::vector<Wgs84Pos>::iterator iter = points.begin(); iter != points.end(); iter++)
-                    //{
-                    //    cout << "     points lon: " << iter->lon << " , lat: " << iter->lat << endl;
-                    //}   
+				    
+				    if (first_ref != last_ref)
+				    {
+				         m_Roads.insert(std::pair<long, Road>(wayId, Road(wayId, road_type_normal, points)));
+                    }
+                    else
+                    {
+				         m_Roads.insert(std::pair<long, Road>(wayId, Road(wayId, road_type_area, points)));                    
+                    }
+ 
 			    }
             } 
         } 
@@ -160,19 +172,21 @@ bool DataAcess::open_database()
             cout << "Way id: " << iter->second.id << " ,shape points count: " << iter->second.shapePoints.size() << endl;
             for(std::vector<Wgs84Pos>::iterator iter_1 = iter->second.shapePoints.begin(); iter_1 != iter->second.shapePoints.end(); iter_1++)
             {
-                cout << "   Mpa points lon: " << iter_1->lon << " , lat: " << iter_1->lat << endl;
+                cout << "   Map points lon: " << iter_1->lon << " , lat: " << iter_1->lat << endl;
             }
         }
           
         ofstream outfile1;
-        outfile1.open("../data/routes.txt", ios::out | ios::binary);
+        outfile1.open("../data/routes_test.txt", ios::out | ios::binary);
         std::map<long, Road>::iterator iter1;
         iter1 = m_Roads.begin();
         while(iter1 != m_Roads.end())
         {
             int count = iter1->second.shapePoints.size();
+            int roadtype = iter1->second.type;
             outfile1.write((char*)&iter1->second.id, 8);
             outfile1.write((char*)(&count), 4);
+            outfile1.write((char*)(&roadtype), 4);
             for(std::vector<Wgs84Pos>::iterator iter_2 = iter1->second.shapePoints.begin(); iter_2 != iter1->second.shapePoints.end(); iter_2++)
             {
                 outfile1.write((char*)&iter_2->lon, sizeof(iter_2->lon));
