@@ -72,6 +72,8 @@ private:
     int                                      m_x_offset; 
     int                                      m_y_offset;                           
     QPixmap*                                 m_OfflinePixmap;
+    QPixmap*                                 m_routePixmap1;   
+    QPixmap*                                 m_routePixmap2;     
     RouteCalculation::Shapepoints            m_Route;
     Position::Shapepoint                     m_CarPosition;
     std::shared_ptr<RouteCalculationProxy<>> myRouteCalcProxy;

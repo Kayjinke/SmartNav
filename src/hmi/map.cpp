@@ -56,6 +56,11 @@ MapWidget::MapWidget(Widget *parent) :
     m_OfflinePixmap = new QPixmap(QSize(1024 * 2, 768 * 2));
     m_OfflinePixmap->fill(Qt::transparent);
     
+    m_routePixmap1 = new QPixmap(QSize(1024 * 2, 768 * 2));
+    m_routePixmap1->fill(Qt::transparent);
+
+    m_routePixmap2 = new QPixmap(QSize(1024 * 2, 768 * 2));
+    m_routePixmap2->fill(Qt::transparent);    
     
      m_DBThread = new MyThread();
      m_DBThread->start();
@@ -77,27 +82,26 @@ MapWidget::~MapWidget()
 
 void MapWidget::on_btn_Up_clicked()
 {
-    cout << "up show" << endl; 
-    m_y_offset += 5;
+    m_y_offset += 10;
     update();
 }
 
 void MapWidget::on_btn_Down_clicked()
 {
-    m_y_offset -= 5;
+    m_y_offset -= 10;
     
     update();
 }
 
 void MapWidget::on_btn_Left_clicked()
 {
-    m_x_offset += 5;
+    m_x_offset += 10;
     update();
 }
 
 void MapWidget::on_btn_Right_clicked()
 {
-    m_x_offset -= 5;
+    m_x_offset -= 10;
     update();
 }
 
@@ -133,17 +137,21 @@ void MapWidget::on_btn_DemoRoute1_clicked()
      std::cout << "Call route with demo route 1 ..." << std::endl;
      RouteCalculation::Shapepoint startpoint;
      RouteCalculation::Shapepoint endpoint;
+     startpoint.setLon(1);
      CommonAPI::CallInfo info(1000);
      #endif
      CommonAPI::CallStatus callStatus; 
      myRouteCalcProxy->calcRoute(startpoint, endpoint, callStatus, m_Route);
      std::cout << "Call route with demo route 1 ..." << m_Route.size() << std::endl;
+     
+     QPainter offline_painter(m_routePixmap1);
+     render_route(&offline_painter);
      update();
 }
 
 void MapWidget::on_btn_DemoRoute2_clicked()
 {
-     #if 0
+
      std::shared_ptr < CommonAPI::Runtime > runtime = CommonAPI::Runtime::get();
      if (!myRouteCalcProxy)
      {
@@ -163,17 +171,21 @@ void MapWidget::on_btn_DemoRoute2_clicked()
          
 
      }
-     #endif
+
      std::cout << "Call route with demo route 2 ..." << std::endl;
-     #if 0
+
      RouteCalculation::Shapepoint startpoint;
      RouteCalculation::Shapepoint endpoint;
+     startpoint.setLon(2);    
+     cout << " lon " << startpoint.getLon() << endl;
      CommonAPI::CallInfo info(1000);
 
      CommonAPI::CallStatus callStatus;   
      myRouteCalcProxy->calcRoute(startpoint, endpoint, callStatus, m_Route); 
+     QPainter offline_painter(m_routePixmap2);
+     render_route(&offline_painter);
      update();   
-     #endif
+
 }
 
 struct ScreenPoint
@@ -241,7 +253,7 @@ void MapWidget::render_roads(QPainter* painter, const std::map<long, Route>& roa
     }
  
     
-        for(std::map<long, Route>::const_iterator iter = roads.begin(); iter != roads.end(); iter++)
+    for(std::map<long, Route>::const_iterator iter = roads.begin(); iter != roads.end(); iter++)
     {
 
          if (iter->second.count >= 2)
@@ -257,7 +269,7 @@ void MapWidget::render_roads(QPainter* painter, const std::map<long, Route>& roa
     
     for(std::map<long, Route>::const_iterator iter = roads.begin(); iter != roads.end(); iter++)
     {
-         if (iter->second.count > 2)
+         if (iter->second.count >= 2)
          {
              if(iter->second.type == 1)
              {
@@ -339,14 +351,14 @@ void MapWidget::render_route(QPainter* painter)
      RouteCalculation::Shapepoints::iterator iter = m_Route.begin();
      ScreenPoint pt;
      convert2screenpoint(Wgs84Pos((*iter).getLon(), (*iter).getLat()), pt);
-     path.moveTo(pt.x, pt.y);
+     path.moveTo(pt.x , pt.y );
             
      do
      {
          //std::cout << "route lon: " << (*iter).getLon() << " route lat:" << (*iter).getLat() << endl;
          iter++;
          convert2screenpoint(Wgs84Pos((*iter).getLon(), (*iter).getLat()), pt);
-         path.lineTo(pt.x, pt.y);
+         path.lineTo(pt.x , pt.y );
      }
      while(iter != m_Route.end() - 1);
      painter->drawPath(path);
@@ -361,8 +373,9 @@ void MapWidget::paintEvent(QPaintEvent *event)
 
 
      painter.drawPixmap(m_x_offset, m_y_offset, *m_OfflinePixmap);
- 
-     render_route(&painter);
+     painter.drawPixmap(m_x_offset, m_y_offset, *m_routePixmap1);
+     painter.drawPixmap(m_x_offset, m_y_offset, *m_routePixmap2);
+     
      render_vehicle(&painter);
 
 }

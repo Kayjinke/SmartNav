@@ -33,18 +33,32 @@ void RouteCalculationStubImpl::calcRoute(const std::shared_ptr<CommonAPI::Client
     const std::map<long, Route>& roads = dacalc.getAllRoads();
     cout << "iter size "  << roads.size() << endl; 
 
-    for(std::map<long, Route>::const_iterator iter = roads.begin(); iter != roads.end(); iter++)
+    if(_startPos.getLon() == 1)
     {
-         if(iter->first == 3784001)
-         {
-            for(std::vector<Wgs84Pos>::const_iterator iter1 = iter->second.shapePoints.begin(); iter1 != iter->second.shapePoints.end(); iter1++)
+        std::map<long, Route>::const_iterator iter = roads.find(3724830);
+        if (iter != roads.end())
+        {
+            for(std::vector<Wgs84Pos>::const_iterator iter1 = iter->second.shapePoints.begin();
+                 iter1 != iter->second.shapePoints.end(); iter1++)
             {
-                cout << "R lon: " << iter1->lon << endl; 
+                 shapepoints.push_back(RouteCalculation::Shapepoint(iter1->lon, iter1->lat));
+            }
+        }
+    }
+    if(_startPos.getLon() == 2)
+    {
+        std::map<long, Route>::const_iterator iter = roads.find(3784001);
+        if (iter != roads.end())
+        {
+            for(std::vector<Wgs84Pos>::const_iterator iter1 = iter->second.shapePoints.begin();
+                 iter1 != iter->second.shapePoints.end(); iter1++)
+            {
                 shapepoints.push_back(RouteCalculation::Shapepoint(iter1->lon, iter1->lat));
             }
-         }
-    } 
+        }
+    }
    
+
     cout << "HHHHHHHHHHHHHHHHH" << endl; 
     //shapepoints.push_back(RouteCalculation::Shapepoint(-118.2038679, 34.0751386));
     //shapepoints.push_back(RouteCalculation::Shapepoint(-118.2053329, 34.0754687));
