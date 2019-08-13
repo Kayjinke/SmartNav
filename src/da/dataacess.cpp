@@ -11,6 +11,9 @@ DataRead::DataRead()
 {
 }
 
+Routeinput::Routeinput()
+{}
+
 bool DataRead::shapepoint_read(string filename)
 {
     long   id = 0;
@@ -157,5 +160,25 @@ bool DataRead::road_read(string filename)
             cout << "vector lon:" << setprecision(7) << iter1->lon << ", lat: " << iter1->lat << endl;
         }
     }
-    #endif
+#endif
 }
+
+void Routeinput::routeinput(long id)
+{
+    DataRead dacalc;
+    dacalc.road_read("../data/routes.txt");
+    const std::map<long, Route>& roads = dacalc.getAllRoads();
+      
+    std::map<long, Route>::const_iterator iter = roads.find(id);
+    if (iter != roads.end())
+    {
+        for(std::vector<Wgs84Pos>::const_iterator iter1 = iter->second.shapePoints.begin();
+             iter1 != iter->second.shapePoints.end(); iter1++)
+            {
+                 poslist.push_back(Wgs84Pos(iter1->lon, iter1->lat));
+            }
+    }
+
+}
+
+

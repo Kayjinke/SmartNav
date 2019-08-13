@@ -75,5 +75,17 @@ private:
     std::map<long, Route> r_Roads;
 };
 
+class Routeinput
+{
+public:
+    Routeinput();
+    void routeinput(long id);
+    std::vector<Wgs84Pos> getRoute() { return poslist; }
+    
+private:
+    long                  id;
+    std::map<long, Route> roads;
+    std::vector<Wgs84Pos> poslist;
+};
 
 #endif /*dataacess_h*/

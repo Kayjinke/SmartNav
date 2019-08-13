@@ -1,27 +1,8 @@
 #include "RouteCalculationStubImpl.hpp"
 #include "dataacess.h"
 
- 
- static DataRead dacalc;
-    
-class GlobalData
-{
-public:
-    GlobalData()
-    { 
-       std::cout << "global data " << std::endl;
-        dacalc.road_read("../data/routes.txt");
-        std::cout << "RouteCalculationStubImpl end" << std::endl;
-    }
-}globalData;
+RouteCalculationStubImpl::RouteCalculationStubImpl() { }
 
-RouteCalculationStubImpl::RouteCalculationStubImpl()
-{ 
-
-std::cout << "RouteCalculationStubImpl" << std::endl;
-
-
-}
 RouteCalculationStubImpl::~RouteCalculationStubImpl() { }
 
 void RouteCalculationStubImpl::calcRoute(const std::shared_ptr<CommonAPI::ClientId> _client, RouteCalculation::Shapepoint _startPos, RouteCalculation::Shapepoint _endPos, calcRouteReply_t _reply) {
@@ -29,37 +10,31 @@ void RouteCalculationStubImpl::calcRoute(const std::shared_ptr<CommonAPI::Client
     std::cout << "calcRoute called, setting new values." << std::endl;
 
     RouteCalculation::Shapepoints shapepoints;
- 
-    const std::map<long, Route>& roads = dacalc.getAllRoads();
-    cout << "iter size "  << roads.size() << endl; 
 
     if(_startPos.getLon() == 1)
     {
-        std::map<long, Route>::const_iterator iter = roads.find(3724830);
-        if (iter != roads.end())
+
+        Routeinput input;
+        input.routeinput(3724830);
+        const std::vector<Wgs84Pos>& roads = input.getRoute();
+        for(std::vector<Wgs84Pos>::const_iterator iter = roads.begin(); iter != roads.end(); iter++ )
         {
-            for(std::vector<Wgs84Pos>::const_iterator iter1 = iter->second.shapePoints.begin();
-                 iter1 != iter->second.shapePoints.end(); iter1++)
-            {
-                 shapepoints.push_back(RouteCalculation::Shapepoint(iter1->lon, iter1->lat));
-            }
+            shapepoints.push_back(RouteCalculation::Shapepoint(iter->lon, iter->lat));
         }
     }
+    
+
     if(_startPos.getLon() == 2)
     {
-        std::map<long, Route>::const_iterator iter = roads.find(3784001);
-        if (iter != roads.end())
+        Routeinput input;
+        input.routeinput(3784001);
+        const std::vector<Wgs84Pos>& roads = input.getRoute();
+        for(std::vector<Wgs84Pos>::const_iterator iter = roads.begin(); iter != roads.end(); iter++ )
         {
-            for(std::vector<Wgs84Pos>::const_iterator iter1 = iter->second.shapePoints.begin();
-                 iter1 != iter->second.shapePoints.end(); iter1++)
-            {
-                shapepoints.push_back(RouteCalculation::Shapepoint(iter1->lon, iter1->lat));
-            }
+            shapepoints.push_back(RouteCalculation::Shapepoint(iter->lon, iter->lat));
         }
     }
-   
-
-    cout << "HHHHHHHHHHHHHHHHH" << endl; 
+    cout << "RouteCalculationStubImpl over" << endl; 
     //shapepoints.push_back(RouteCalculation::Shapepoint(-118.2038679, 34.0751386));
     //shapepoints.push_back(RouteCalculation::Shapepoint(-118.2053329, 34.0754687));
     //shapepoints.push_back(RouteCalculation::Shapepoint(-118.2022890, 34.0745812));

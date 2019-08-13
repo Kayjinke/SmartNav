@@ -207,7 +207,4 @@ bool DataAcess::open_database()
             std::cerr << exc.displayText() << std::endl;  
         } 
         
-    
-  
- 
 }

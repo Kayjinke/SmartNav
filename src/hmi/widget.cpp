@@ -20,9 +20,9 @@ Widget::Widget(QWidget *parent) :
 {
     ui->setupUi(this);
     setWindowTitle("SmartNav");
-    setWindowFlags (Qt::FramelessWindowHint);
+    //setWindowFlags (Qt::FramelessWindowHint);
     connect(ui->btn_destinationinput, SIGNAL(clicked()), this, SLOT(on_destinationinput_btn_clicked()));
-    connect(ui->btn_routecalculation, SIGNAL(clicked()), this, SLOT(on_routecalculation_btn_clicked()));
+    //connect(ui->btn_map, SIGNAL(clicked()), this, SLOT(on_routecalculation_btn_clicked()));
     connect(ui->btn_POI, SIGNAL(clicked()), this, SLOT(on_Poi_btn_clicked()));
 
    
@@ -30,7 +30,9 @@ Widget::Widget(QWidget *parent) :
     m_Background = QPixmap::fromImage(*image);
   
     m_MapWidget = new MapWidget(this);
+    m_DestinationInputWidget = new DestinationInputWidget(this);
     m_MapWidget->hide();
+    m_DestinationInputWidget->hide();
 
 }
 
@@ -48,7 +50,7 @@ void Widget::reshow()
 void Widget::hide_all()
 {
      ui->btn_destinationinput->hide(); 
-     ui->btn_routecalculation->hide(); 
+     ui->btn_map->hide(); 
      ui->btn_POI->hide();
      ui->btn_weather->hide();
 }
@@ -57,7 +59,7 @@ void Widget::hide_all()
 void Widget::show_all()
 {
      ui->btn_destinationinput->show(); 
-     ui->btn_routecalculation->show(); 
+     ui->btn_map->show(); 
      ui->btn_POI->show();
      ui->btn_weather->show();
 }
@@ -65,6 +67,12 @@ void Widget::show_all()
 void Widget::on_btn_map_back_clicked()
 {
      m_MapWidget->hide();
+     show_all();
+}
+
+void Widget::on_btn_di_back_clicked()
+{
+     m_DestinationInputWidget->hide();
      show_all();
 }
 
@@ -81,21 +89,14 @@ void Widget::on_destinationinput_btn_clicked()
      widget->show();
 }
 
-void Widget::on_routecalculation_btn_clicked()
+void Widget::on_btn_map_clicked()
 {
-    cout << "on_map show" << endl;
+
      hide_all();
-     if (!m_MapWidget)
-     {
-         m_MapWidget = new MapWidget(this);
-     }
+     m_MapWidget = new MapWidget(this);
      m_MapWidget->show();
 }
 
-void Widget::on_Quit_btn_clicked()
-{
-    close();
-}
 
 void Widget::on_Poi_btn_clicked()
 {

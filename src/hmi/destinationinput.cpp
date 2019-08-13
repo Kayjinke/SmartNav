@@ -1,18 +1,21 @@
 #include "destinationinput.h"
 #include "ui_destinationinput.h"
+#include "widget.h"
 #include <iostream>
 #include <QPainter>
 #include <CommonAPI/CommonAPI.hpp>
 #include <v1/commonapi/DestinationInputProxy.hpp>
 #include <unistd.h>
 
-DestinationInputWidget::DestinationInputWidget(QWidget *parent) :
+DestinationInputWidget::DestinationInputWidget(Widget *parent) :
     QWidget(parent),
+    m_Parent(parent),
     ui(new Ui::DestinationInput)
 {
     ui->setupUi(this);
-    setWindowTitle("DestinationInput");
-    this->setAttribute(Qt::WA_DeleteOnClose,1);
+    
+    connect(ui->btn_diback, SIGNAL(clicked()), m_Parent, SLOT(on_btn_di_back_clicked()));
+
 }
 
 DestinationInputWidget::~DestinationInputWidget()
@@ -44,9 +47,9 @@ void DestinationInputWidget::on_pushButton_clicked()
          return;
      }
 
-     while (!myProxy->isAvailable())
-         usleep(10);
-     std::cout << "Available..." << std::endl;
+    while (!myProxy->isAvailable())
+    usleep(10);
+    std::cout << "Available..." << std::endl;
     CommonAPI::CallInfo info(1000);
     CommonAPI::CallStatus callStatus;
     DestinationInput::Stringlist streets;

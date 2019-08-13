@@ -54,10 +54,12 @@ private slots:
     void on_btn_Right_clicked();
     void on_btn_DemoRoute1_clicked();
     void on_btn_DemoRoute2_clicked();
+
     
 private:
    void on_position_change(::v1::commonapi::Position::Shapepoint pos);
    void render_roads(QPainter* painter, const std::map<long, Route>& roads);
+   void render_polygon(QPainter* painter, const std::map<long, Route>& roads);
    void render_vehicle(QPainter* painter);
    void render_route(QPainter* painter);
    void render_road(QPainter* painter, const Route& roads);
@@ -72,6 +74,7 @@ private:
     int                                      m_x_offset; 
     int                                      m_y_offset;                           
     QPixmap*                                 m_OfflinePixmap;
+    QPixmap*                                 m_OfflinePolygonPixmap;    
     QPixmap*                                 m_routePixmap1;   
     QPixmap*                                 m_routePixmap2;     
     RouteCalculation::Shapepoints            m_Route;

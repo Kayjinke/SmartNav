@@ -16,8 +16,8 @@ static const double axis_xmax = -118.19955; // -118.2000054   -118.19955
 static const double axis_ymin = 34.07353;// 34.0644870        34.07353
 static const double axis_x = axis_xmax - axis_xmin;
 static const double axis_y = axis_ymax - axis_ymin;
-static const int screen_width = 1024 ;
-static const int screen_height = 576 ;
+static const int screen_width = 1366 ;
+static const int screen_height = 768 ;
 
 
 MyThread::MyThread() {}
@@ -50,16 +50,20 @@ MapWidget::MapWidget(Widget *parent) :
     connect(ui->btn_Right, SIGNAL(clicked()), this, SLOT(on_btn_Right_clicked()));
     connect(ui->btn_Down, SIGNAL(clicked()), this, SLOT(on_btn_Down_clicked()));
     #endif
-   
- 
-       
-    m_OfflinePixmap = new QPixmap(QSize(1024 * 2, 768 * 2));
-    m_OfflinePixmap->fill(Qt::transparent);
     
-    m_routePixmap1 = new QPixmap(QSize(1024 * 2, 768 * 2));
+    
+    connect(ui->btn_mapback, SIGNAL(clicked()), m_Parent, SLOT(on_btn_map_back_clicked())); 
+       
+    m_OfflinePixmap = new QPixmap(QSize(1366 * 2, 768 * 2));
+    m_OfflinePixmap->fill(Qt::transparent);
+
+    m_OfflinePolygonPixmap = new QPixmap(QSize(1366 * 2, 768 * 2));
+    m_OfflinePolygonPixmap->fill(Qt::transparent);
+        
+    m_routePixmap1 = new QPixmap(QSize(1366 * 2, 768 * 2));
     m_routePixmap1->fill(Qt::transparent);
 
-    m_routePixmap2 = new QPixmap(QSize(1024 * 2, 768 * 2));
+    m_routePixmap2 = new QPixmap(QSize(1366 * 2, 768 * 2));
     m_routePixmap2->fill(Qt::transparent);    
     
      m_DBThread = new MyThread();
@@ -70,38 +74,42 @@ MapWidget::MapWidget(Widget *parent) :
      
      const std::map<long, Route>& roads = da.getAllRoads();
      QPainter offline_painter(m_OfflinePixmap);
+     QPainter offline_painterpolygon(m_OfflinePolygonPixmap);
+     render_polygon(&offline_painterpolygon, roads);
      render_roads(&offline_painter, roads);
+
 }
 
 MapWidget::~MapWidget()
 {
     delete ui;
     delete m_OfflinePixmap;
+    delete m_OfflinePolygonPixmap;
 }
 
 
 void MapWidget::on_btn_Up_clicked()
 {
-    m_y_offset += 10;
+    m_y_offset += 20;
     update();
 }
 
 void MapWidget::on_btn_Down_clicked()
 {
-    m_y_offset -= 10;
+    m_y_offset -= 20;
     
     update();
 }
 
 void MapWidget::on_btn_Left_clicked()
 {
-    m_x_offset += 10;
+    m_x_offset += 20;
     update();
 }
 
 void MapWidget::on_btn_Right_clicked()
 {
-    m_x_offset -= 10;
+    m_x_offset -= 20;
     update();
 }
 
@@ -109,7 +117,7 @@ void MapWidget::on_position_change(::v1::commonapi::Position::Shapepoint pos)
 {
      cout << "pos lon: " << pos.getLon() << " lat: " << pos.getLat() << endl;
      m_CarPosition = pos;
-     repaint();
+     update();
 }
 
 
@@ -117,7 +125,6 @@ void MapWidget::on_position_change(::v1::commonapi::Position::Shapepoint pos)
 void MapWidget::on_btn_DemoRoute1_clicked()
 {
      std::shared_ptr < CommonAPI::Runtime > runtime = CommonAPI::Runtime::get();
-     #if 1
      if (!myRouteCalcProxy)
      {
          myRouteCalcProxy = runtime->buildProxy<RouteCalculationProxy>("local", "calcRoute");
@@ -139,7 +146,7 @@ void MapWidget::on_btn_DemoRoute1_clicked()
      RouteCalculation::Shapepoint endpoint;
      startpoint.setLon(1);
      CommonAPI::CallInfo info(1000);
-     #endif
+
      CommonAPI::CallStatus callStatus; 
      myRouteCalcProxy->calcRoute(startpoint, endpoint, callStatus, m_Route);
      std::cout << "Call route with demo route 1 ..." << m_Route.size() << std::endl;
@@ -151,7 +158,6 @@ void MapWidget::on_btn_DemoRoute1_clicked()
 
 void MapWidget::on_btn_DemoRoute2_clicked()
 {
-
      std::shared_ptr < CommonAPI::Runtime > runtime = CommonAPI::Runtime::get();
      if (!myRouteCalcProxy)
      {
@@ -171,7 +177,6 @@ void MapWidget::on_btn_DemoRoute2_clicked()
          
 
      }
-
      std::cout << "Call route with demo route 2 ..." << std::endl;
 
      RouteCalculation::Shapepoint startpoint;
@@ -185,7 +190,6 @@ void MapWidget::on_btn_DemoRoute2_clicked()
      QPainter offline_painter(m_routePixmap2);
      render_route(&offline_painter);
      update();   
-
 }
 
 struct ScreenPoint
@@ -231,7 +235,7 @@ void MapWidget::on_btn_StartDemo_clicked()
          myPosProxy->setRoute(pos_route, callStatus);
          myPosProxy->startDemo(callStatus);
          std::cout << "start demo" << std::endl;
-         update();
+         
      }
 }
 
@@ -244,20 +248,6 @@ void MapWidget::render_roads(QPainter* painter, const std::map<long, Route>& roa
 
          if (iter->second.count >= 2)
          {
-             if(iter->second.type == 2)
-             {
-                 painter->setPen(QPen(QColor(205, 193, 180), 1, Qt::SolidLine, Qt::RoundCap));
-                 render_area(painter, iter->second);
-             }
-         }
-    }
- 
-    
-    for(std::map<long, Route>::const_iterator iter = roads.begin(); iter != roads.end(); iter++)
-    {
-
-         if (iter->second.count >= 2)
-         {
              if(iter->second.type == 1)
              {
 
@@ -265,8 +255,8 @@ void MapWidget::render_roads(QPainter* painter, const std::map<long, Route>& roa
                  render_road(painter, iter->second);
              }
          }
-    } 
-    
+    }   
+   
     for(std::map<long, Route>::const_iterator iter = roads.begin(); iter != roads.end(); iter++)
     {
          if (iter->second.count >= 2)
@@ -278,7 +268,25 @@ void MapWidget::render_roads(QPainter* painter, const std::map<long, Route>& roa
              }
          }
     } 
+
     cout << "draw roads end" << endl;
+}
+
+void MapWidget::render_polygon(QPainter* painter, const std::map<long, Route>& roads)
+{
+    for(std::map<long, Route>::const_iterator iter = roads.begin(); iter != roads.end(); iter++)
+    {
+
+         if (iter->second.count >= 2)
+         {
+             if(iter->second.type == 2)
+             {
+                 painter->setPen(QPen(QColor(205, 193, 180), 1, Qt::SolidLine, Qt::RoundCap));
+                 render_area(painter, iter->second);
+             }
+         }
+    }
+    cout << "draw polygon end" << endl;
 }
 
 void MapWidget::render_road(QPainter* painter, const Route& roads)
@@ -287,7 +295,6 @@ void MapWidget::render_road(QPainter* painter, const Route& roads)
      
      QPainterPath path;
      ScreenPoint pt;
-     
 
      std::vector<Wgs84Pos>::const_iterator iter = roads.shapePoints.begin();
      
@@ -312,9 +319,6 @@ void MapWidget::render_road(QPainter* painter, const Route& roads)
 
 void MapWidget::render_area(QPainter* painter, const Route& roads)
 {
-    // cout << "draw road" << endl;
-     
-     
     QPoint *points = new QPoint[roads.shapePoints.size()] ;
 
     for(int i = 0; i < roads.shapePoints.size(); i++)
@@ -333,7 +337,7 @@ void MapWidget::render_vehicle(QPainter* painter)
      Wgs84Pos pos(m_CarPosition.getLon(), m_CarPosition.getLat());
      ScreenPoint pt;
      convert2screenpoint(pos, pt);
-     painter->drawEllipse(pt.x - 3, pt.y - 3, 6, 6);
+     painter->drawEllipse(pt.x - 3, pt.y - 3, 14, 14);
 }
 
 void MapWidget::render_route(QPainter* painter)
@@ -369,9 +373,9 @@ void MapWidget::paintEvent(QPaintEvent *event)
      cout << "paintEvent" << endl;
      QPainter painter(this);   
      painter.setBrush(QColor(242, 239, 233));
-     painter.drawRect(0, 0, 1024, 576);
+     painter.drawRect(0, 0, 1366, 768);
 
-
+     painter.drawPixmap(m_x_offset, m_y_offset, *m_OfflinePolygonPixmap);
      painter.drawPixmap(m_x_offset, m_y_offset, *m_OfflinePixmap);
      painter.drawPixmap(m_x_offset, m_y_offset, *m_routePixmap1);
      painter.drawPixmap(m_x_offset, m_y_offset, *m_routePixmap2);

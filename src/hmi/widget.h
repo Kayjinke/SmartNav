@@ -11,6 +11,8 @@ class Widget;
 
 
 class MapWidget;
+class DestinationInputWidget;
+
 
 class Widget : public QWidget
 {
@@ -29,10 +31,10 @@ protected:
         void paintEvent(QPaintEvent *event);
 private slots:
         void on_destinationinput_btn_clicked();
-        void on_routecalculation_btn_clicked();
-        void on_Quit_btn_clicked();
+        void on_btn_map_clicked();
         void on_Poi_btn_clicked();
         void on_btn_map_back_clicked();
+        void on_btn_di_back_clicked();
         
         
         void reshow();     
@@ -47,6 +49,7 @@ private:
     Ui::Widget*  ui;
     QPixmap      m_Background;
     MapWidget*   m_MapWidget;
+    DestinationInputWidget*   m_DestinationInputWidget;
 };
 
 #endif // WIDGET_H

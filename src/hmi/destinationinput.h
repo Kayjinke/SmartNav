@@ -13,12 +13,14 @@ namespace Ui {
 class DestinationInput;
 }
 
+class Widget;
+
 class DestinationInputWidget : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit DestinationInputWidget(QWidget *parent = 0);
+    explicit DestinationInputWidget(Widget *parent = 0);
     ~DestinationInputWidget();
 protected:
         void paintEvent(QPaintEvent *event);
@@ -31,6 +33,7 @@ signals:
 
 private:
     Ui::DestinationInput *ui;
+    Widget*                                  m_Parent;
     std::shared_ptr<DestinationInputProxy<>> myProxy;
 };
 
