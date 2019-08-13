@@ -24,8 +24,8 @@ static const int road_type_area   = 0x0002;
 
 struct Road
 {
-   Road(long a, int type, const Wgs84PosList& list)
-   : id(a), shapePoints(list)
+   Road(long a, int t, const Wgs84PosList& list)
+   : id(a), type(t), shapePoints(list)
    {}
    
    long id;
@@ -50,8 +50,8 @@ private:
 
 struct Route
 {
-   Route(int a, int type, const Wgs84PosList& list)
-   : count(a), shapePoints(list)
+   Route(int a, int t, const Wgs84PosList& list)
+   : count(a), type(t), shapePoints(list)
    {}
    
    int count;

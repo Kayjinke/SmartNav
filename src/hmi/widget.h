@@ -45,6 +45,7 @@ private:
 
 private:
     Ui::Widget*  ui;
+    QPixmap      m_Background;
     MapWidget*   m_MapWidget;
 };
 

@@ -38,8 +38,8 @@ bool DataRead::shapepoint_read(string filename)
 
     
     //定义Qt上坐标轴的x和y范围以及地图信息的坐标范围；
-    double x = 800;
-    double y = 480;
+    double x = 1024;
+    double y = 768;
     double axis_x ;
     double axis_y ;
     axis_x = axis_xmax - axis_xmin;
@@ -68,7 +68,7 @@ bool DataRead::shapepoint_read(string filename)
     }
     cout << " starting...  The counter :" << r_ShapePoints.size() << " sizeof: " << sizeof(r_ShapePoints) << " bytes" << endl;
 
- 
+ #if 0
     for(Wgs84PosMapIter iter = r_ShapePoints.begin(); iter != r_ShapePoints.end(); iter++) 
     {
         cout << fixed;
@@ -89,10 +89,10 @@ bool DataRead::shapepoint_read(string filename)
         cout << fixed;
         cout << setprecision(7)<< "Final read node id: " << iter->first << ", lon: " << iter->second.lon << ", Lat: " <<  iter->second.lat << endl;
     }
-
+#endif
    
  // # calculate max&min longtitude and latitude;
-   /*for(std::vector<double>::iterator iter_lon = AllLon.begin(); iter_lon != AllLon.end(); iter_lon++)
+   for(std::vector<double>::iterator iter_lon = AllLon.begin(); iter_lon != AllLon.end(); iter_lon++)
     {   
         max_lon = *max_element(AllLon.begin(), AllLon.end());
         min_lon = *min_element(AllLon.begin(), AllLon.end());            
@@ -104,14 +104,10 @@ bool DataRead::shapepoint_read(string filename)
     {   
         max_lat = *max_element(AllLat.begin(), AllLat.end());
         min_lat = *min_element(AllLat.begin(), AllLat.end());  
-    }   Mpa points lon: -118.2078319 , lat: 34.0755396
-   Mpa points lon: -118.2090966 , lat: 34.0755199
-   Mpa points lon: -118.2104038 , lat: 34.0754996
-   Mpa points lon: -118.2117936 , lat: 34.0754780
-   Mpa points lon: -118.2131035 , lat: 34.0754577
+    }   
 
     cout << fixed;    
-    cout << "max_Lat: " << setprecision(7) << max_lat << ", min_Lat: " << setprecision(7) << min_lat << endl;*/     
+    cout << "max_Lat: " << setprecision(7) << max_lat << ", min_Lat: " << setprecision(7) << min_lat << endl;    
 
 
 }
@@ -119,6 +115,7 @@ bool DataRead::shapepoint_read(string filename)
 
 bool DataRead::road_read(string filename)
 {   
+    cout << "road read " << endl;
     ifstream filestream;
     ifstream infile(filename, ios::in | ios::binary);
     if(filestream.fail())
@@ -150,7 +147,7 @@ bool DataRead::road_read(string filename)
     }
     
     cout << " reading roads...  The counter :" << r_Roads.size() << " sizeof: " << sizeof(r_Roads) << " bytes" << endl;
-    
+#if 0    
     for(std::map<long, Route>::iterator iter = r_Roads.begin(); iter != r_Roads.end(); iter++)
     {
         cout << "id: " << iter->first  << "  " << iter->second.count  << ", type  "  << iter->second.type << endl;
@@ -160,4 +157,5 @@ bool DataRead::road_read(string filename)
             cout << "vector lon:" << setprecision(7) << iter1->lon << ", lat: " << iter1->lat << endl;
         }
     }
+    #endif
 }

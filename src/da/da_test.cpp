@@ -5,10 +5,10 @@ using namespace std;
 
 int main()
 {
-    cout << " start read data1.1" << endl;
+    cout << " start read data1.1_____________" << endl;
     DataRead dr;
-    dr.shapepoint_read("../data/shapepoints_test.txt");
-    dr.road_read("../data/routes_test.txt");
+    dr.shapepoint_read("../data/shapepoints.txt");
+    dr.road_read("../data/routes.txt");
     
     return 0;
 }

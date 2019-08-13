@@ -6,31 +6,31 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>480</height>
+    <width>1024</width>
+    <height>576</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QPushButton" name="btn_RouteCalculation">
+  <widget class="QPushButton" name="btn_StartDemo">
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>60</y>
+     <y>100</y>
      <width>141</width>
      <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>RouteCalculation</string>
+    <string>Start Demo</string>
    </property>
   </widget>
   <widget class="QPushButton" name="btn_mapback">
    <property name="geometry">
     <rect>
-     <x>670</x>
-     <y>430</y>
+     <x>860</x>
+     <y>510</y>
      <width>91</width>
      <height>41</height>
     </rect>
@@ -47,7 +47,7 @@
   <widget class="QPushButton" name="btn_Up">
    <property name="geometry">
     <rect>
-     <x>670</x>
+     <x>880</x>
      <y>20</y>
      <width>61</width>
      <height>31</height>
@@ -60,7 +60,7 @@
   <widget class="QPushButton" name="btn_Left">
    <property name="geometry">
     <rect>
-     <x>630</x>
+     <x>840</x>
      <y>60</y>
      <width>61</width>
      <height>31</height>
@@ -73,7 +73,7 @@
   <widget class="QPushButton" name="btn_Right">
    <property name="geometry">
     <rect>
-     <x>710</x>
+     <x>920</x>
      <y>60</y>
      <width>61</width>
      <height>31</height>
@@ -86,7 +86,7 @@
   <widget class="QPushButton" name="btn_Down">
    <property name="geometry">
     <rect>
-     <x>670</x>
+     <x>880</x>
      <y>100</y>
      <width>61</width>
      <height>31</height>
@@ -96,7 +96,7 @@
     <string>Down</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="btn_Map">
+  <widget class="QPushButton" name="btn_DemoRoute1">
    <property name="geometry">
     <rect>
      <x>30</x>
@@ -106,7 +106,20 @@
     </rect>
    </property>
    <property name="text">
-    <string>Map</string>
+    <string>Demo Route 1</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_DemoRoute2">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>60</y>
+     <width>141</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Demo Route 2</string>
    </property>
   </widget>
  </widget>

@@ -44,7 +44,7 @@ bool DataAcess::open_database()
         {
             NodeList* nl = pDoc->getElementsByTagName("node");
             cout << "points count: " << nl->length() << endl;
-            for (long i = 0; i < 50; i++)
+            for (long i = 0; i < nl->length(); i++)
             {
                 Node* node = nl->item(i);
                 NamedNodeMap* nm = node->attributes();
@@ -79,7 +79,7 @@ bool DataAcess::open_database()
         cout << " size : " << sizeof(m_ShapePoints) <<  endl; 
            
         ofstream outfile;
-        outfile.open("../data/shapepoints_test.txt", ios::out | ios::binary);
+        outfile.open("../data/shapepoints.txt", ios::out | ios::binary);
         std::map<long, Wgs84Pos>::iterator iter;
         iter = m_ShapePoints.begin();
         while(iter!=m_ShapePoints.end())
@@ -94,7 +94,7 @@ bool DataAcess::open_database()
         {
             NodeList* nl = pDoc->getElementsByTagName("way");
             cout << "ways count: " << nl->length() << endl;
-            for (int i = 0; i < 50; i++)
+            for (int i = 0; i < nl->length(); i++)
             {
                 long wayId = 0;
                 Wgs84PosList points;                
@@ -136,40 +136,41 @@ bool DataAcess::open_database()
 					                if (attr->nodeName() == "ref")
 					                {
 					                    ref  = atol(attr->nodeValue().c_str());
-					                    if (first_ref != 0)
+					                    if (first_ref == 0)
 					                    {
 					                        first_ref = ref;
 					                    }
 					                    last_ref = ref;
-					                    cout << "first ref: " << first_ref << "last_ref: " << endl;
                                     }
 				                }
-				                cout << "ref: " << ref << endl;
+				                cout << "ref: " << ref  << ", first ref: " << first_ref << "  last_ref: " << last_ref << endl;
 				                Wgs84PosMapIter iter = m_ShapePoints.find(ref);
 				                if (iter != m_ShapePoints.end())
 				                {
 				                     points.push_back(iter->second);
                                 }
-				            }
+
+                                
+				            }  
 				       }
 				    }
-				    
-				    if (first_ref != last_ref)
-				    {
-				         m_Roads.insert(std::pair<long, Road>(wayId, Road(wayId, road_type_normal, points)));
+				   
+                    if (first_ref != last_ref)
+                    {
+                         m_Roads.insert(std::pair<long, Road>(wayId, Road(wayId, road_type_normal, points)));
                     }
                     else
                     {
-				         m_Roads.insert(std::pair<long, Road>(wayId, Road(wayId, road_type_area, points)));                    
-                    }
- 
+                         m_Roads.insert(std::pair<long, Road>(wayId, Road(wayId, road_type_area, points)));                    
+                    }				    
+
 			    }
             } 
         } 
  
         for(RoadMapIter iter = m_Roads.begin(); iter != m_Roads.end(); iter++)
         {
-            cout << "Way id: " << iter->second.id << " ,shape points count: " << iter->second.shapePoints.size() << endl;
+            cout << "Way id: " << iter->second.id << ", shape points count: " << iter->second.shapePoints.size() << ", type: " << iter->second.type << endl;
             for(std::vector<Wgs84Pos>::iterator iter_1 = iter->second.shapePoints.begin(); iter_1 != iter->second.shapePoints.end(); iter_1++)
             {
                 cout << "   Map points lon: " << iter_1->lon << " , lat: " << iter_1->lat << endl;
@@ -177,7 +178,7 @@ bool DataAcess::open_database()
         }
           
         ofstream outfile1;
-        outfile1.open("../data/routes_test.txt", ios::out | ios::binary);
+        outfile1.open("../data/routes.txt", ios::out | ios::binary);
         std::map<long, Road>::iterator iter1;
         iter1 = m_Roads.begin();
         while(iter1 != m_Roads.end())
@@ -191,7 +192,7 @@ bool DataAcess::open_database()
             {
                 outfile1.write((char*)&iter_2->lon, sizeof(iter_2->lon));
                 outfile1.write((char*)&iter_2->lat, sizeof(iter_2->lat));
-               cout << " , current lon=: "  << iter_2->lon << " , lat=: " << iter_2->lat << endl;
+               cout << "  current lon=: "  << iter_2->lon << " , lat=: " << iter_2->lat << endl;
             }
             iter1++;
             cout <<  "Write wayid=: " << iter1->second.id << " ,  count=: " << count << endl;
