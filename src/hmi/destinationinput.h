@@ -2,7 +2,11 @@
 #define destinationinput_H
 
 #include <QWidget>
+#include <QLabel>
+#include <QComboBox>
+#include <QPushButton>
 #include <CommonAPI/CommonAPI.hpp>
+#include "UIChinaCity.h"
 #include <v1/commonapi/DestinationInputProxy.hpp>
 
 
@@ -22,19 +26,20 @@ class DestinationInputWidget : public QWidget
 public:
     explicit DestinationInputWidget(Widget *parent = 0);
     ~DestinationInputWidget();
+
 protected:
         void paintEvent(QPaintEvent *event);
 private slots:
         void on_pushButton_clicked();
-        void on_btn_diback_clicked();
-
-signals:
-        void sendsignal();
+        void onStateComboBoxIndexChanged(int);
+        void onCityComboBoxIndexChanged(int);
 
 private:
     Ui::DestinationInput *ui;
-    Widget*                                  m_Parent;
-    std::shared_ptr<DestinationInputProxy<>> myProxy;
+    Widget*                                   m_Parent;
+    std::shared_ptr<DestinationInputProxy<>>  myProxy;  
+    UIChinaCity                               *chinaCityManager = nullptr;
+    
 };
 
 #endif // destinationinput_H

@@ -12,5 +12,6 @@ add_executable(da_test da_test.cpp)
 
 target_link_libraries(da_test dataacess)
 
+
 install(TARGETS da_compiler DESTINATION bin)
 install(TARGETS da_test DESTINATION bin)

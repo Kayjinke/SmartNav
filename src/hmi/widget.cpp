@@ -85,8 +85,8 @@ void Widget::paintEvent(QPaintEvent *event)
 void Widget::on_destinationinput_btn_clicked()
 {
      hide_all();
-     QWidget* widget = new DestinationInputWidget(this);
-     widget->show();
+     m_DestinationInputWidget  = new DestinationInputWidget(this);
+     m_DestinationInputWidget->show();
 }
 
 void Widget::on_btn_map_clicked()

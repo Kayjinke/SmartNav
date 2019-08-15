@@ -2,8 +2,9 @@ cmake_minimum_required(VERSION 2.8)
 
 project(NavigationHMI)
 
-find_package(Qt5 COMPONENTS Core Gui REQUIRED)
+find_package(Qt5 COMPONENTS Core Gui Xml REQUIRED)
 find_package(Qt5Widgets)
+
 
 SET(CMAKE_AUTOUIC ON)
 
@@ -14,8 +15,8 @@ include_directories(${Qt5Widgets_INCLUDE_DIRS})
 include_directories(${CMAKE_SOURCE_DIR}/src/da)
 
 
-SET(NavigationHMI_SOURCES main.cpp widget.cpp destinationinput.cpp map.cpp poi.cpp)
-SET(NavigationHMI_HEADERS widget.h destinationinput.h map.h poi.h)
+SET(NavigationHMI_SOURCES main.cpp widget.cpp destinationinput.cpp map.cpp poi.cpp UIChinaCity.cpp)
+SET(NavigationHMI_HEADERS widget.h destinationinput.h map.h poi.h UIChinaCity.h)
 SET(NavigationHMI_FORMS   widget.ui destinationinput.ui map.ui poi.ui)
 
 qt5_wrap_cpp(NavigationHMI_HEADERS_MOC ${NavigationHMI_HEADERS})
@@ -31,7 +32,7 @@ add_executable(NavigationHMI ${NavigationHMI_SOURCES} ${NavigationHMI_HEADERS} $
 	${CMAKE_BINARY_DIR}/fidl/src-gen/v1/commonapi/PositionSomeIPDeployment.cpp
 	)
 
-QT5_USE_MODULES(NavigationHMI Core Gui Widgets)
+QT5_USE_MODULES(NavigationHMI Core Gui Xml Widgets)
 
 target_link_libraries(NavigationHMI dataacess CommonAPI CommonAPI-SomeIP vsomeip)
 
