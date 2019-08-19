@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1366</width>
-    <height>768</height>
+    <width>1600</width>
+    <height>900</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,53 +16,103 @@
   <widget class="QPushButton" name="btn_destinationinput">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>80</y>
-     <width>271</width>
-     <height>161</height>
+     <x>220</x>
+     <y>230</y>
+     <width>300</width>
+     <height>300</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>40</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{color: white;
+								background-color:rgba(54,109,114,0.85);
+								border:2px groove gray;
+								border-radius:30px;
+								padding:2px 4px;
+								border-image: url(/home/jk/SmartNav-x86_64-build/install/image/Icon1.png);}
+//QPushButton:hover{background-color:white; color: black;}
+//QPushButton:pressed{background-color:rgb(85, 170, 255); border-style: inset; }
+
+
+
+
+
+</string>
+   </property>
    <property name="text">
-    <string>Destination Input</string>
+    <string>Address</string>
+   </property>
+   <property name="default">
+    <bool>false</bool>
+   </property>
+   <property name="flat">
+    <bool>false</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="btn_map">
    <property name="geometry">
     <rect>
-     <x>510</x>
-     <y>80</y>
-     <width>301</width>
-     <height>161</height>
+     <x>670</x>
+     <y>220</y>
+     <width>300</width>
+     <height>300</height>
     </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>40</pointsize>
+     <weight>75</weight>
+     <italic>false</italic>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{color: White;
+								background-color:rgba(0,0,0,0.75);
+								border:2px groove gray;
+								border-radius:30px;
+								padding:2px 4px;
+								border-image: url(/home/jk/SmartNav-x86_64-build/install/image/Icon2.jpg);}
+
+
+</string>
    </property>
    <property name="text">
     <string>Map</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="btn_POI">
+  <widget class="QPushButton" name="btn_music">
    <property name="geometry">
     <rect>
-     <x>170</x>
-     <y>280</y>
-     <width>271</width>
-     <height>161</height>
+     <x>1120</x>
+     <y>220</y>
+     <width>300</width>
+     <height>300</height>
     </rect>
    </property>
-   <property name="text">
-    <string>POI</string>
+   <property name="font">
+    <font>
+     <pointsize>40</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
-  </widget>
-  <widget class="QPushButton" name="btn_weather">
-   <property name="geometry">
-    <rect>
-     <x>510</x>
-     <y>280</y>
-     <width>301</width>
-     <height>161</height>
-    </rect>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{color: White;
+								background-color:rgba(255,255,255,100);
+								border:2px groove gray;
+								border-radius:30px;
+								padding:2px 4px;
+								border-image: url(/home/jk/SmartNav-x86_64-build/install/image/Icon3.png);}</string>
    </property>
    <property name="text">
-    <string>Setting</string>
+    <string>Music</string>
    </property>
   </widget>
  </widget>

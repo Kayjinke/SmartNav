@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1366</width>
-    <height>768</height>
+    <width>1600</width>
+    <height>900</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,11 +16,18 @@
   <widget class="QPushButton" name="btn_StartDemo">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>100</y>
-     <width>141</width>
-     <height>31</height>
+     <x>40</x>
+     <y>170</y>
+     <width>140</width>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{color: White;
+								background-color:rgba(0,0,0,0.65);
+								border:2px groove gray;
+								border-radius:10px;
+								padding:2px 4px;}</string>
    </property>
    <property name="text">
     <string>Start Demo</string>
@@ -29,16 +36,25 @@
   <widget class="QPushButton" name="btn_mapback">
    <property name="geometry">
     <rect>
-     <x>1250</x>
-     <y>600</y>
-     <width>91</width>
-     <height>41</height>
+     <x>1410</x>
+     <y>800</y>
+     <width>141</width>
+     <height>61</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>15</pointsize>
+     <pointsize>20</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{color: White;
+								background-color:rgba(0,0,0,0.75);
+								border:2px groove gray;
+								border-radius:10px;
+								padding:2px 4px;}</string>
    </property>
    <property name="text">
     <string>Back</string>
@@ -47,63 +63,86 @@
   <widget class="QPushButton" name="btn_Up">
    <property name="geometry">
     <rect>
-     <x>1230</x>
-     <y>40</y>
-     <width>61</width>
-     <height>31</height>
+     <x>1450</x>
+     <y>70</y>
+     <width>50</width>
+     <height>50</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{boders:none;
+								border-image: url(/home/jk/SmartNav-x86_64-build/install/image/arrow1.png);}</string>
+   </property>
    <property name="text">
-    <string>Up</string>
+    <string/>
    </property>
   </widget>
   <widget class="QPushButton" name="btn_Left">
    <property name="geometry">
     <rect>
-     <x>1170</x>
-     <y>80</y>
-     <width>61</width>
-     <height>31</height>
+     <x>1400</x>
+     <y>120</y>
+     <width>50</width>
+     <height>50</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{boders:none;
+								border-image: url(/home/jk/SmartNav-x86_64-build/install/image/arrow2.png);}</string>
+   </property>
    <property name="text">
-    <string>Left</string>
+    <string/>
    </property>
   </widget>
   <widget class="QPushButton" name="btn_Right">
    <property name="geometry">
     <rect>
-     <x>1290</x>
-     <y>80</y>
-     <width>61</width>
-     <height>31</height>
+     <x>1500</x>
+     <y>120</y>
+     <width>50</width>
+     <height>50</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{boders:none;
+								border-image: url(/home/jk/SmartNav-x86_64-build/install/image/arrow4.png);}</string>
+   </property>
    <property name="text">
-    <string>Right</string>
+    <string/>
    </property>
   </widget>
   <widget class="QPushButton" name="btn_Down">
    <property name="geometry">
     <rect>
-     <x>1230</x>
-     <y>120</y>
-     <width>61</width>
-     <height>31</height>
+     <x>1450</x>
+     <y>170</y>
+     <width>50</width>
+     <height>50</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{boders:none;
+								border-image: url(/home/jk/SmartNav-x86_64-build/install/image/arrow3.png);}</string>
+   </property>
    <property name="text">
-    <string>Down</string>
+    <string/>
    </property>
   </widget>
   <widget class="QPushButton" name="btn_DemoRoute1">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>20</y>
-     <width>141</width>
-     <height>31</height>
+     <x>40</x>
+     <y>50</y>
+     <width>140</width>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{color: White;
+								background-color:rgba(0,0,0,0.65);
+								border:2px groove gray;
+								border-radius:10px;
+								padding:2px 4px;}</string>
    </property>
    <property name="text">
     <string>Demo Route 1</string>
@@ -112,11 +151,18 @@
   <widget class="QPushButton" name="btn_DemoRoute2">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>60</y>
-     <width>141</width>
-     <height>31</height>
+     <x>40</x>
+     <y>110</y>
+     <width>140</width>
+     <height>50</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{color: White;
+								background-color:rgba(0,0,0,0.65);
+								border:2px groove gray;
+								border-radius:10px;
+								padding:2px 4px;}</string>
    </property>
    <property name="text">
     <string>Demo Route 2</string>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1366</width>
-    <height>768</height>
+    <width>1600</width>
+    <height>900</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,39 +16,66 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>490</x>
-     <y>50</y>
-     <width>131</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>StreetsList</string>
-   </property>
-  </widget>
-  <widget class="QListWidget" name="listWidget">
-   <property name="geometry">
-    <rect>
-     <x>620</x>
-     <y>50</y>
+     <x>540</x>
+     <y>310</y>
      <width>421</width>
-     <height>371</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="btn_diback">
-   <property name="geometry">
-    <rect>
-     <x>850</x>
-     <y>510</y>
-     <width>91</width>
      <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>15</pointsize>
+     <pointsize>14</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
     </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{color: White;
+								background-color:rgba(0,0,0,0.75);
+								border:2px groove gray;
+								border-radius:10px;
+								padding:2px 4px;}</string>
+   </property>
+   <property name="text">
+    <string>街道检索</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="listWidget">
+   <property name="geometry">
+    <rect>
+     <x>540</x>
+     <y>350</y>
+     <width>421</width>
+     <height>311</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QListWidget{
+								background-color:rgba(255,255,255,0.75);}</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_diback">
+   <property name="geometry">
+    <rect>
+     <x>1410</x>
+     <y>740</y>
+     <width>141</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>25</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{color: Black;
+								background-color:rgba(255,255,255,0.75);
+								border:2px groove gray;
+								border-radius:10px;
+								padding:2px 4px;}</string>
    </property>
    <property name="text">
     <string>Back</string>
@@ -57,72 +84,159 @@
   <widget class="QComboBox" name="m_StateComboBox">
    <property name="geometry">
     <rect>
-     <x>110</x>
-     <y>50</y>
-     <width>261</width>
-     <height>41</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="m_CityComboBox">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
+     <x>690</x>
      <y>110</y>
      <width>261</width>
      <height>41</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QComboBox{color: Black;
+								background-color:rgba(255,255,255,0.75);
+								border:2px groove gray;
+								border-radius:10px;
+								padding:2px 4px;}</string>
+   </property>
   </widget>
-  <widget class="QComboBox" name="m_RegionComboBox">
+  <widget class="QComboBox" name="m_CityComboBox">
    <property name="geometry">
     <rect>
-     <x>110</x>
+     <x>690</x>
      <y>170</y>
      <width>261</width>
      <height>41</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QComboBox{color: Black;
+								background-color:rgba(255,255,255,0.75);
+								border:2px groove gray;
+								border-radius:10px;
+								padding:2px 4px;}</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="m_RegionComboBox">
+   <property name="geometry">
+    <rect>
+     <x>690</x>
+     <y>230</y>
+     <width>261</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QComboBox{color: Black;
+								background-color:rgba(255,255,255,0.75);
+								border:2px groove gray;
+								border-radius:10px;
+								padding:2px 4px;}</string>
+   </property>
   </widget>
   <widget class="QLabel" name="m_StateLabel">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>60</y>
-     <width>67</width>
-     <height>17</height>
+     <x>580</x>
+     <y>110</y>
+     <width>111</width>
+     <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{color: White;}
+</string>
+   </property>
    <property name="text">
-    <string>State</string>
+    <string>省/直辖市</string>
    </property>
   </widget>
   <widget class="QLabel" name="m_CityLabel">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>120</y>
-     <width>67</width>
-     <height>17</height>
+     <x>540</x>
+     <y>170</y>
+     <width>141</width>
+     <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{color: White;}
+</string>
+   </property>
    <property name="text">
-    <string>City</string>
+    <string>城市/直辖市区</string>
    </property>
   </widget>
   <widget class="QLabel" name="m_RegionLabel">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>180</y>
-     <width>67</width>
-     <height>17</height>
+     <x>620</x>
+     <y>230</y>
+     <width>61</width>
+     <height>31</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <pointsize>16</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{color: White;}
+</string>
+   </property>
    <property name="text">
-    <string>Region</string>
+    <string>区/县</string>
    </property>
   </widget>
+  <widget class="QFrame" name="frame">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>80</y>
+     <width>511</width>
+     <height>591</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QFrame{color: White;
+								background-color:rgba(0,0,0,0.75);
+								border:2px groove gray;
+								border-radius:10px;
+								padding:2px 4px;}</string>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+  </widget>
+  <zorder>frame</zorder>
+  <zorder>pushButton</zorder>
+  <zorder>listWidget</zorder>
+  <zorder>btn_diback</zorder>
+  <zorder>m_StateComboBox</zorder>
+  <zorder>m_CityComboBox</zorder>
+  <zorder>m_RegionComboBox</zorder>
+  <zorder>m_StateLabel</zorder>
+  <zorder>m_CityLabel</zorder>
+  <zorder>m_RegionLabel</zorder>
  </widget>
  <resources/>
  <connections/>

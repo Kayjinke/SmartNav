@@ -3,7 +3,7 @@
 #include <iostream>
 #include <QPainter>
 #include "widget.h"
-
+#include <iomanip>
 #include <unistd.h>
 
 
@@ -16,8 +16,8 @@ static const double axis_xmax = -118.19955; // -118.2000054   -118.19955
 static const double axis_ymin = 34.07353;// 34.0644870        34.07353
 static const double axis_x = axis_xmax - axis_xmin;
 static const double axis_y = axis_ymax - axis_ymin;
-static const int screen_width = 1366 ;
-static const int screen_height = 768 ;
+static const int screen_width = 1600 ;
+static const int screen_height = 900 ;
 
 
 MyThread::MyThread() {}
@@ -54,16 +54,16 @@ MapWidget::MapWidget(Widget *parent) :
     
     connect(ui->btn_mapback, SIGNAL(clicked()), m_Parent, SLOT(on_btn_map_back_clicked())); 
        
-    m_OfflinePixmap = new QPixmap(QSize(1366 * 2, 768 * 2));
+    m_OfflinePixmap = new QPixmap(QSize(1600 * 2, 900 * 2));
     m_OfflinePixmap->fill(Qt::transparent);
 
-    m_OfflinePolygonPixmap = new QPixmap(QSize(1366 * 2, 768 * 2));
+    m_OfflinePolygonPixmap = new QPixmap(QSize(1600 * 2, 900 * 2));
     m_OfflinePolygonPixmap->fill(Qt::transparent);
         
-    m_routePixmap1 = new QPixmap(QSize(1366 * 2, 768 * 2));
+    m_routePixmap1 = new QPixmap(QSize(1600 * 2, 900 * 2));
     m_routePixmap1->fill(Qt::transparent);
 
-    m_routePixmap2 = new QPixmap(QSize(1366 * 2, 768 * 2));
+    m_routePixmap2 = new QPixmap(QSize(1600 * 2, 900 * 2));
     m_routePixmap2->fill(Qt::transparent);    
     
      m_DBThread = new MyThread();
@@ -115,7 +115,8 @@ void MapWidget::on_btn_Right_clicked()
 
 void MapWidget::on_position_change(::v1::commonapi::Position::Shapepoint pos)
 {
-     cout << "pos lon: " << pos.getLon() << " lat: " << pos.getLat() << endl;
+     cout << fixed;
+     cout << setprecision(7) << "pos lon: " << pos.getLon() << " lat: " << pos.getLat() << endl;
      m_CarPosition = pos;
      update();
 }
@@ -231,6 +232,51 @@ void MapWidget::on_btn_StartDemo_clicked()
          {
              pos_route.push_back(Position::Shapepoint(iter->getLon(), iter->getLat()));
          }
+         
+ 		float deltaLon1 = (pos_route[2].getLon()-pos_route[1].getLon())/10;
+		float deltaLat1 = (pos_route[2].getLat()-pos_route[1].getLat())/10;
+		for(int i=1;i<10;i++)
+	     {
+			pos_route.insert(pos_route.begin()+i+1,Position::Shapepoint(pos_route[1].getLon()+deltaLon1*i, pos_route[1].getLat()+deltaLat1*i));
+		}
+
+		
+		float deltaLon2 = (pos_route[16].getLon()-pos_route[15].getLon())/5;
+		float deltaLat2 = (pos_route[16].getLat()-pos_route[15].getLat())/5;
+		for(int i=1;i<5;i++)
+	     {
+
+			pos_route.insert(pos_route.begin()+i+15,Position::Shapepoint(pos_route[15].getLon()+deltaLon2*i, pos_route[15].getLat()+deltaLat2*i));
+          }
+
+		 float deltaLon3 = (pos_route[24].getLon()-pos_route[23].getLon())/10;
+		 float deltaLat3 = (pos_route[24].getLat()-pos_route[23].getLat())/10;	 	
+		 for(int i=1;i<10;i++)
+	     {
+			pos_route.insert(pos_route.begin()+i+23,Position::Shapepoint(pos_route[23].getLon()+deltaLon3*i, pos_route[23].getLat()+deltaLat3*i));
+          }
+
+		 float deltaLon4 = (pos_route[34].getLon()-pos_route[33].getLon())/6;
+		 float deltaLat4 = (pos_route[34].getLat()-pos_route[33].getLat())/6;
+		 for(int i=1;i<6;i++)
+	     {
+			pos_route.insert(pos_route.begin()+i+33,Position::Shapepoint(pos_route[33].getLon()+deltaLon4*i, pos_route[33].getLat()+deltaLat4*i));
+          }
+
+		 float deltaLon5 = (pos_route[42].getLon()-pos_route[41].getLon())/6;
+		 float deltaLat5 = (pos_route[42].getLat()-pos_route[41].getLat())/6;
+		 for(int i=1;i<6;i++)
+	     {
+			pos_route.insert(pos_route.begin()+i+41,Position::Shapepoint(pos_route[41].getLon()+deltaLon5*i, pos_route[41].getLat()+deltaLat5*i));
+          }
+
+	     float deltaLon6 = (pos_route[48].getLon()-pos_route[47].getLon())/4;
+		 float deltaLat6 = (pos_route[48].getLat()-pos_route[47].getLat())/4;
+		 for(int i=1;i<4;i++)
+	     {
+			pos_route.insert(pos_route.begin()+i+47,Position::Shapepoint(pos_route[47].getLon()+deltaLon6*i, pos_route[47].getLat()+deltaLat6*i));
+          }
+         
          CommonAPI::CallStatus callStatus;             
          myPosProxy->setRoute(pos_route, callStatus);
          myPosProxy->startDemo(callStatus);
@@ -337,7 +383,10 @@ void MapWidget::render_vehicle(QPainter* painter)
      Wgs84Pos pos(m_CarPosition.getLon(), m_CarPosition.getLat());
      ScreenPoint pt;
      convert2screenpoint(pos, pt);
-     painter->drawEllipse(pt.x - 3, pt.y - 3, 14, 14);
+     //painter->drawEllipse(pt.x - 3, pt.y - 3, 14, 14);
+     QImage *image= new QImage("../image/car.png");  
+     QPixmap car = QPixmap::fromImage(*image);
+	 painter->drawPixmap(pt.x - 22.5,  pt.y - 30, 45, 60,car);
 }
 
 void MapWidget::render_route(QPainter* painter)
@@ -373,7 +422,7 @@ void MapWidget::paintEvent(QPaintEvent *event)
      cout << "paintEvent" << endl;
      QPainter painter(this);   
      painter.setBrush(QColor(242, 239, 233));
-     painter.drawRect(0, 0, 1366, 768);
+     painter.drawRect(0, 0, 1600, 900);
 
      painter.drawPixmap(m_x_offset, m_y_offset, *m_OfflinePolygonPixmap);
      painter.drawPixmap(m_x_offset, m_y_offset, *m_OfflinePixmap);
