@@ -89,8 +89,8 @@ void MusicWidget::on_add_clicked()
     ui->tableWidget->setRowCount(fileInfo->count());
     ui->tableWidget->setColumnCount(1);
 
-    ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);    //将表格设置为禁止编辑
-    ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);   //将表格设置为整行选择
+    ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);    
+    ui->tableWidget->setSelectionBehavior(QAbstractItemView::SelectRows);   
     ui->tableWidget->setHorizontalHeaderLabels(QStringList()<<"歌曲名称");
     for(int i = 0; i < fileInfo->count(); i++)
     {
@@ -99,8 +99,8 @@ void MusicWidget::on_add_clicked()
         qDebug() << "file_Name" <<fileInfo->at(i).fileName();
         qDebug() << "file_filePath" <<fileInfo->at(i).filePath();
     }
-    ui->tableWidget->resizeColumnsToContents(); //将列的大小设为与内容相匹配
-    ui->tableWidget->resizeRowsToContents();    //将行的大小设为与内容相匹配
+    ui->tableWidget->resizeColumnsToContents(); 
+    ui->tableWidget->resizeRowsToContents();    
 }
 
 void MusicWidget::on_tableWidget_doubleClicked(const QModelIndex &index)
@@ -165,7 +165,7 @@ void MusicWidget::change_by_mode()
     qDebug()<<"success";
     switch(ui->mode->currentIndex())
     {
-    case 0:                         //顺序播放
+    case 0:                         
     {
         if(cur_index == filePath.length())
         {
@@ -184,7 +184,7 @@ void MusicWidget::change_by_mode()
         mediaPlayer->play();
         break;
     }
-    case 1:                         //随机播放
+    case 1:                         
     {
         cur_index = qrand()%filePath.length();
         qDebug()<<"cur_index"<<cur_index<<"lenthg"<<filePath.length();
@@ -197,7 +197,7 @@ void MusicWidget::change_by_mode()
         mediaPlayer->play();
         break;
     }
-    case 2:                         //单曲循环
+    case 2:                        
     {
         cur_music = filePath.at(cur_index);
         mediaPlayer->setMedia(QUrl::fromLocalFile(cur_music));
@@ -257,11 +257,11 @@ void MusicWidget::on_activatedSysTrayIcon(QSystemTrayIcon::ActivationReason reas
         case QSystemTrayIcon::Context:
             break;
         case QSystemTrayIcon::Trigger:
-                //单击托盘图标
+                
             break;
         case QSystemTrayIcon::DoubleClick:
-            //双击托盘图标
-            //双击后显示主程序窗口
+            
+            
             this->show();
             break;
         default:

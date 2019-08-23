@@ -9,3 +9,5 @@ sleep 1
 sleep 1
 
 ./DestinationInputService &
+
+sleep 1
